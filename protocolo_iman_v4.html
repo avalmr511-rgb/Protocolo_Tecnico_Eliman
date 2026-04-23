@@ -1,0 +1,2300 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<title>GUIA-TEC-001 v2.0 | Maquinarias El Imán</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;600;700;800;900&family=Barlow:wght@300;400;500;600&display=swap');
+
+:root {
+  --bg: #f0f2f5;
+  --white: #ffffff;
+  --border: #d8dce4;
+  --border-light: #eaecf0;
+  --accent: #c97d08;
+  --accent-bg: #fff8ec;
+  --red: #c73a14;
+  --red-bg: #fdf1ee;
+  --green: #1a9e55;
+  --green-bg: #edf8f2;
+  --blue: #1d6bbf;
+  --blue-bg: #eef4fc;
+  --yellow: #d4a017;
+  --yellow-bg: #fffae8;
+  --purple: #6b3fa0;
+  --purple-bg: #f3eefb;
+  --text: #1a1f2b;
+  --text2: #3d4655;
+  --muted: #6b7585;
+  --header-bg: #1a2235;
+
+  /* Ticket priority colors */
+  --p-verde: #1a9e55;
+  --p-verde-bg: #edf8f2;
+  --p-verde-border: #6ed4a0;
+  --p-amarillo: #c97d08;
+  --p-amarillo-bg: #fff8ec;
+  --p-amarillo-border: #f0c060;
+  --p-rojo: #c73a14;
+  --p-rojo-bg: #fdf1ee;
+  --p-rojo-border: #f0a090;
+  --p-morado: #6b3fa0;
+  --p-morado-bg: #f3eefb;
+  --p-morado-border: #c0a0e0;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'Barlow', Arial, sans-serif;
+  font-size: 15px;
+  line-height: 1.6;
+  min-height: 100vh;
+  -webkit-text-size-adjust: 100%;
+}
+
+/* ── HEADER ── */
+.header {
+  background: var(--header-bg);
+  border-bottom: 4px solid var(--accent);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.2);
+}
+.header-inner {
+  max-width: 920px;
+  margin: 0 auto;
+  padding: 13px 16px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+.logo-block { display: flex; align-items: center; gap: 12px; }
+.logo-icon {
+  width: 42px; height: 42px;
+  background: var(--accent);
+  border-radius: 8px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 20px; flex-shrink: 0;
+}
+.logo-text h1 {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 800; font-size: 18px;
+  color: #fff; line-height: 1.1; text-transform: uppercase;
+}
+.logo-text span { font-size: 10px; color: #9aaabb; letter-spacing: 1.5px; text-transform: uppercase; }
+.header-meta { display: flex; gap: 6px; align-items: center; flex-wrap: wrap; }
+.badge {
+  background: rgba(255,255,255,0.1);
+  border: 1px solid rgba(255,255,255,0.2);
+  border-radius: 4px; padding: 3px 8px;
+  font-size: 10px;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 600; letter-spacing: 1px; text-transform: uppercase; color: #c0ccda;
+}
+.badge.active { background: rgba(201,125,8,0.3); border-color: var(--accent); color: #f5c060; }
+
+/* ── TABS ── */
+.tab-nav {
+  background: var(--white);
+  border-bottom: 1px solid var(--border);
+  position: sticky; top: 70px; z-index: 90;
+}
+.tab-nav-inner { max-width: 920px; margin: 0 auto; display: flex; }
+.tab-btn {
+  flex: 1; padding: 13px 6px;
+  border: none; background: transparent;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 700; font-size: 13px;
+  letter-spacing: 0.8px; text-transform: uppercase;
+  color: var(--muted); cursor: pointer;
+  border-bottom: 3px solid transparent;
+  transition: all 0.2s; touch-action: manipulation;
+}
+.tab-btn:hover { color: var(--text); background: #f8f9fb; }
+.tab-btn.active { color: var(--accent); border-bottom-color: var(--accent); }
+
+/* ── PROGRESS ── */
+.progress-wrap {
+  background: #fff; border-bottom: 1px solid var(--border);
+  padding: 10px 16px; display: none;
+}
+.progress-inner { max-width: 920px; margin: 0 auto; }
+.progress-labels {
+  display: flex; justify-content: space-between;
+  font-size: 12px; color: var(--muted); margin-bottom: 6px;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 600; letter-spacing: 0.5px; text-transform: uppercase;
+}
+.progress-labels .prog-pct { color: var(--accent); font-size: 13px; }
+.progress-track { height: 8px; background: var(--border-light); border-radius: 4px; overflow: hidden; }
+.progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--red), var(--accent));
+  border-radius: 4px; width: 0%;
+  transition: width 0.5s cubic-bezier(.4,0,.2,1);
+}
+
+/* ── MAIN ── */
+.main { max-width: 920px; margin: 0 auto; padding: 20px 14px 80px; }
+.tab-panel { display: none; }
+.tab-panel.active { display: block; }
+
+/* ════════════════════════════════════════
+   SISTEMA DE TICKETS — STYLES
+════════════════════════════════════════ */
+
+.tk-hero {
+  background: linear-gradient(135deg, #1a2235 0%, #243050 100%);
+  border-radius: 14px;
+  padding: 24px 20px 20px;
+  margin-bottom: 20px;
+  border: 1px solid #2e3f60;
+  position: relative;
+  overflow: hidden;
+}
+.tk-hero::before {
+  content: '';
+  position: absolute;
+  top: -30px; right: -30px;
+  width: 140px; height: 140px;
+  background: rgba(201,125,8,0.12);
+  border-radius: 50%;
+}
+.tk-hero-top {
+  display: flex; align-items: center; gap: 14px; margin-bottom: 14px;
+}
+.tk-hero-icon {
+  width: 52px; height: 52px;
+  background: var(--accent);
+  border-radius: 12px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 24px; flex-shrink: 0;
+}
+.tk-hero h2 {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 900; font-size: 22px;
+  color: #fff; text-transform: uppercase;
+  letter-spacing: 0.5px; line-height: 1.1;
+}
+.tk-hero p {
+  font-size: 12.5px; color: #8da0bb; line-height: 1.5;
+  margin-top: 3px;
+}
+.tk-meta-row {
+  display: flex; gap: 8px; flex-wrap: wrap;
+  padding-top: 14px;
+  border-top: 1px solid rgba(255,255,255,0.08);
+}
+.tk-meta-chip {
+  background: rgba(255,255,255,0.07);
+  border: 1px solid rgba(255,255,255,0.12);
+  border-radius: 5px; padding: 3px 10px;
+  font-size: 10px;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 700; letter-spacing: 1px; text-transform: uppercase;
+  color: #8da0bb;
+}
+
+/* ── TICKET FORM CARD ── */
+.tk-form-card {
+  background: var(--white);
+  border: 1.5px solid var(--border);
+  border-radius: 14px;
+  overflow: hidden;
+  margin-bottom: 16px;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+}
+.tk-form-header {
+  background: linear-gradient(90deg, #1a2235, #253050);
+  padding: 14px 18px;
+  display: flex; align-items: center; gap: 12px;
+}
+.tk-form-header-icon {
+  width: 36px; height: 36px;
+  background: var(--accent);
+  border-radius: 8px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 17px; flex-shrink: 0;
+}
+.tk-form-header-text h3 {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 800; font-size: 16px;
+  color: #fff; text-transform: uppercase; letter-spacing: 0.5px;
+}
+.tk-form-header-text span {
+  font-size: 10.5px; color: #8da0bb;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 600; letter-spacing: 0.5px;
+}
+.tk-form-body { padding: 18px 18px 20px; }
+
+/* Fields */
+.tk-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  margin-bottom: 12px;
+}
+.tk-row.single { grid-template-columns: 1fr; }
+.tk-field label {
+  display: block;
+  font-size: 10.5px;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 700; letter-spacing: 1px;
+  text-transform: uppercase; color: var(--muted);
+  margin-bottom: 5px;
+}
+.tk-field label .req { color: var(--red); margin-left: 2px; }
+.tk-field input,
+.tk-field select,
+.tk-field textarea {
+  width: 100%;
+  background: #f8f9fb;
+  border: 1.5px solid var(--border);
+  border-radius: 8px;
+  padding: 10px 12px;
+  font-family: 'Barlow', sans-serif;
+  font-size: 14px;
+  color: var(--text);
+  outline: none;
+  transition: border-color 0.2s, background 0.2s;
+  -webkit-appearance: none;
+}
+.tk-field input:focus,
+.tk-field select:focus,
+.tk-field textarea:focus {
+  border-color: var(--accent);
+  background: var(--white);
+}
+.tk-field textarea { resize: vertical; min-height: 90px; }
+
+/* Priority selector */
+.tk-priority-label {
+  font-size: 10.5px;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 700; letter-spacing: 1px;
+  text-transform: uppercase; color: var(--muted);
+  margin-bottom: 8px; display: block;
+}
+.tk-priority-label .req { color: var(--red); }
+.priority-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+}
+.prio-btn {
+  display: flex; align-items: center; gap: 10px;
+  padding: 11px 13px;
+  border: 2px solid transparent;
+  border-radius: 10px;
+  cursor: pointer;
+  background: #f8f9fb;
+  transition: all 0.18s;
+  text-align: left;
+  user-select: none;
+}
+.prio-btn:hover { transform: translateY(-1px); box-shadow: 0 3px 10px rgba(0,0,0,0.1); }
+.prio-dot {
+  width: 16px; height: 16px; border-radius: 50%;
+  flex-shrink: 0;
+}
+.prio-btn-text { flex: 1; }
+.prio-btn-title {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 800; font-size: 13px; text-transform: uppercase;
+  letter-spacing: 0.5px; line-height: 1.1;
+}
+.prio-btn-desc { font-size: 10.5px; color: var(--muted); line-height: 1.3; margin-top: 2px; }
+
+.prio-btn[data-p="verde"] { border-color: var(--p-verde-border); background: var(--p-verde-bg); }
+.prio-btn[data-p="verde"] .prio-dot { background: var(--p-verde); }
+.prio-btn[data-p="verde"] .prio-btn-title { color: #126038; }
+
+.prio-btn[data-p="amarillo"] { border-color: var(--p-amarillo-border); background: var(--p-amarillo-bg); }
+.prio-btn[data-p="amarillo"] .prio-dot { background: var(--p-amarillo); }
+.prio-btn[data-p="amarillo"] .prio-btn-title { color: #7a4e00; }
+
+.prio-btn[data-p="rojo"] { border-color: var(--p-rojo-border); background: var(--p-rojo-bg); }
+.prio-btn[data-p="rojo"] .prio-dot { background: var(--p-rojo); }
+.prio-btn[data-p="rojo"] .prio-btn-title { color: #7a2010; }
+
+.prio-btn[data-p="morado"] { border-color: var(--p-morado-border); background: var(--p-morado-bg); }
+.prio-btn[data-p="morado"] .prio-dot { background: var(--p-morado); }
+.prio-btn[data-p="morado"] .prio-btn-title { color: #3d1a70; }
+
+.prio-btn.selected {
+  box-shadow: 0 0 0 3px rgba(201,125,8,0.4), 0 4px 14px rgba(0,0,0,0.12);
+  transform: translateY(-1px);
+}
+.prio-btn[data-p="verde"].selected { box-shadow: 0 0 0 3px rgba(26,158,85,0.4), 0 4px 14px rgba(0,0,0,0.1); }
+.prio-btn[data-p="rojo"].selected { box-shadow: 0 0 0 3px rgba(199,58,20,0.4), 0 4px 14px rgba(0,0,0,0.1); }
+.prio-btn[data-p="morado"].selected { box-shadow: 0 0 0 3px rgba(107,63,160,0.4), 0 4px 14px rgba(0,0,0,0.1); }
+.prio-btn[data-p="amarillo"].selected { box-shadow: 0 0 0 3px rgba(201,125,8,0.4), 0 4px 14px rgba(0,0,0,0.1); }
+
+/* Ticket number display */
+.tk-number-display {
+  background: linear-gradient(135deg, #1a2235, #253050);
+  border-radius: 10px;
+  padding: 14px 16px;
+  display: flex; align-items: center; gap: 14px;
+  margin-bottom: 14px;
+}
+.tk-num-label {
+  font-size: 10px; color: #8da0bb;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase;
+}
+.tk-num-val {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 900; font-size: 22px; color: var(--accent);
+  letter-spacing: 2px;
+}
+.tk-num-ts {
+  margin-left: auto; font-size: 11px; color: #6a7d9a;
+  font-family: 'Barlow Condensed', sans-serif; font-weight: 600;
+}
+
+/* Status badge strip */
+.tk-status-strip {
+  display: flex; align-items: center; gap: 8px;
+  padding: 10px 14px;
+  background: #f8f9fb;
+  border: 1.5px solid var(--border);
+  border-radius: 8px;
+  margin-bottom: 14px;
+}
+.tk-status-dot { width: 10px; height: 10px; border-radius: 50%; background: var(--green); flex-shrink: 0; }
+.tk-status-text { font-size: 12px; color: var(--text2); font-weight: 600; }
+.tk-status-id { margin-left: auto; font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 12px; color: var(--muted); }
+
+/* Submit & share buttons */
+.tk-actions-row {
+  display: flex; gap: 10px; flex-wrap: wrap; margin-top: 18px;
+}
+.tk-btn {
+  flex: 1; min-width: 130px;
+  padding: 13px 16px;
+  border: none; border-radius: 10px;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 800; font-size: 14px;
+  letter-spacing: 0.8px; text-transform: uppercase;
+  cursor: pointer; transition: all 0.18s;
+  display: flex; align-items: center; justify-content: center; gap: 7px;
+}
+.tk-btn:hover { transform: translateY(-1px); box-shadow: 0 5px 18px rgba(0,0,0,0.15); }
+.tk-btn:active { transform: translateY(0); }
+.tk-btn-primary { background: var(--accent); color: #fff; }
+.tk-btn-share { background: var(--green); color: #fff; }
+.tk-btn-copy { background: var(--blue); color: #fff; }
+.tk-btn-download { background: #1a2235; color: #fff; }
+.tk-btn-reset { background: #f0f2f5; color: var(--text2); border: 1.5px solid var(--border); }
+
+/* Ticket preview box */
+.tk-preview-box {
+  display: none;
+  background: #1a2235;
+  border-radius: 10px;
+  padding: 14px 16px;
+  margin-top: 14px;
+  font-family: 'Barlow', monospace;
+  font-size: 12.5px;
+  color: #b0c8e8;
+  white-space: pre-wrap;
+  line-height: 1.6;
+  max-height: 280px;
+  overflow-y: auto;
+}
+.tk-status-msg {
+  display: none;
+  margin-top: 10px;
+  padding: 10px 14px;
+  border-radius: 8px;
+  font-size: 13px; font-weight: 600;
+}
+.tk-status-msg.ok { background: var(--green-bg); color: #126038; border: 1px solid var(--p-verde-border); }
+.tk-status-msg.err { background: var(--red-bg); color: #7a2010; border: 1px solid var(--p-rojo-border); }
+
+/* Saved indicator */
+.save-bar {
+  display: flex; align-items: center; gap: 8px;
+  padding: 8px 14px;
+  background: var(--green-bg);
+  border: 1px solid var(--p-verde-border);
+  border-radius: 8px;
+  margin-top: 10px;
+  font-size: 11.5px; color: #126038; font-weight: 600;
+}
+.save-bar span { font-size: 14px; }
+
+/* Divider */
+.section-divider {
+  display: flex; align-items: center; gap: 10px;
+  margin: 18px 0 14px;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 11px; font-weight: 700; letter-spacing: 1.5px;
+  text-transform: uppercase; color: var(--muted);
+}
+.section-divider::before, .section-divider::after {
+  content: ''; flex: 1; height: 1px; background: var(--border);
+}
+
+/* ════════════════════════════════════════
+   PLANILLA — STYLES (preserved from original)
+════════════════════════════════════════ */
+.alert-banner {
+  background: #fff3cd; border: 1.5px solid #f0c060;
+  border-radius: 10px; padding: 12px 16px;
+  display: flex; gap: 10px; align-items: flex-start;
+  margin-bottom: 16px; font-size: 13px;
+}
+.alert-banner .icon { flex-shrink: 0; margin-top: 1px; }
+
+.step-section { margin-bottom: 10px; }
+.step-card {
+  background: var(--white); border: 1.5px solid var(--border);
+  border-radius: 10px; overflow: hidden;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.05);
+}
+.step-card.completed { border-color: var(--green); }
+.step-card.active { border-color: var(--accent); }
+.step-header {
+  display: flex; align-items: center; gap: 12px;
+  padding: 13px 15px; cursor: pointer;
+  user-select: none; -webkit-user-select: none;
+  transition: background 0.2s;
+}
+.step-header:active { background: #f0f1f3; }
+.step-num {
+  width: 38px; height: 38px; border-radius: 9px;
+  display: flex; align-items: center; justify-content: center;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 800; font-size: 17px; flex-shrink: 0;
+}
+.num-0 { background: #fdf1ee; color: var(--red); border: 2px solid #f0a090; }
+.num-1 { background: var(--blue-bg); color: var(--blue); border: 2px solid #a8c8f0; }
+.num-2 { background: var(--accent-bg); color: var(--accent); border: 2px solid #f0c060; }
+.num-3 { background: var(--green-bg); color: var(--green); border: 2px solid #6ed4a0; }
+.num-4 { background: var(--purple-bg); color: var(--purple); border: 2px solid #c0a0e0; }
+.num-5 { background: #fdf1ee; color: var(--red); border: 2px solid #f0a090; }
+.num-6 { background: var(--blue-bg); color: var(--blue); border: 2px solid #a8c8f0; }
+.num-7 { background: var(--accent-bg); color: var(--accent); border: 2px solid #f0c060; }
+.num-8 { background: var(--green-bg); color: var(--green); border: 2px solid #6ed4a0; }
+.num-9 { background: var(--purple-bg); color: var(--purple); border: 2px solid #c0a0e0; }
+.num-10 { background: #fdf1ee; color: var(--red); border: 2px solid #f0a090; }
+.step-title-block { flex: 1; }
+.step-label { font-size: 10px; color: var(--muted); font-family: 'Barlow Condensed', sans-serif; font-weight: 600; letter-spacing: 0.8px; text-transform: uppercase; }
+.step-title { font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 15px; color: var(--text); }
+.step-status { font-size: 14px; color: var(--green); font-weight: bold; min-width: 18px; text-align: center; }
+.step-icon-right { font-size: 10px; color: var(--muted); }
+.step-body { display: none; padding: 0 15px 16px; border-top: 1px solid var(--border-light); }
+.step-body.open { display: block; animation: fadeIn 0.2s ease; }
+@keyframes fadeIn { from { opacity: 0; transform: translateY(-4px); } to { opacity: 1; transform: translateY(0); } }
+.step-intro { font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 12px; letter-spacing: 0.8px; text-transform: uppercase; color: var(--text2); padding: 12px 0 6px; border-bottom: 1px solid var(--border-light); margin-bottom: 8px; }
+.checklist { list-style: none; }
+.check-item {
+  display: flex; align-items: flex-start; gap: 10px;
+  padding: 9px 10px; border-radius: 7px; margin-bottom: 4px;
+  cursor: pointer; transition: background 0.15s;
+  border: 1px solid transparent; background: #f8f9fb;
+  user-select: none; -webkit-user-select: none;
+}
+.check-item:hover { background: #f0f1f3; }
+.check-item.checked { background: var(--green-bg); border-color: #8ed4b0; }
+.check-box {
+  width: 22px; height: 22px; border-radius: 5px;
+  border: 2px solid var(--border); background: #fff;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 12px; color: transparent; flex-shrink: 0; transition: all 0.15s;
+}
+.check-item.checked .check-box { background: var(--green); border-color: var(--green); color: #fff; }
+.check-label { font-size: 13px; color: var(--text2); line-height: 1.45; flex: 1; padding-top: 1px; }
+.check-item.checked .check-label { color: #126038; }
+
+.form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 10px; }
+.form-field label { display: block; font-size: 10.5px; font-family: 'Barlow Condensed', sans-serif; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; color: var(--muted); margin-bottom: 4px; }
+.form-field input, .form-field select {
+  width: 100%; background: #f8f9fb; border: 1.5px solid var(--border);
+  border-radius: 7px; padding: 9px 12px;
+  font-family: 'Barlow', sans-serif; font-size: 14px; color: var(--text);
+  outline: none; -webkit-appearance: none; transition: border-color 0.2s;
+}
+.form-field input:focus, .form-field select:focus { border-color: var(--accent); background: #fff; }
+
+.equip-select-group { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 6px; }
+.equip-btn {
+  background: #f8f9fb; border: 1.5px solid var(--border); border-radius: 7px;
+  padding: 7px 12px; font-size: 13px; cursor: pointer; transition: all 0.15s;
+  font-family: 'Barlow', sans-serif; color: var(--text2);
+}
+.equip-btn:hover { background: var(--accent-bg); border-color: var(--accent); }
+.equip-btn.selected { background: var(--accent-bg); border-color: var(--accent); color: var(--accent); font-weight: 600; }
+
+.paso0-highlight {
+  background: #fdf1ee; border: 1.5px solid #f0a090; border-radius: 8px;
+  padding: 12px 14px; margin: 12px 0 8px;
+}
+.paso0-highlight h4 { font-family: 'Barlow Condensed', sans-serif; font-weight: 800; font-size: 13px; text-transform: uppercase; color: var(--red); margin-bottom: 4px; }
+.paso0-highlight p { font-size: 12.5px; color: #7a2010; }
+
+.nc-pill {
+  background: var(--red-bg); border: 1.5px solid #f0a090;
+  border-radius: 6px; padding: 8px 12px;
+  font-size: 12px; font-weight: 700; color: var(--red); margin-top: 10px;
+}
+.ref-row { display: flex; flex-wrap: wrap; gap: 5px; margin-top: 10px; }
+.ref-tag {
+  background: var(--blue-bg); border: 1px solid #a8c8f0;
+  border-radius: 4px; padding: 2px 8px;
+  font-size: 10px; font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 700; color: var(--blue); letter-spacing: 0.5px;
+}
+
+.defect-item.checked { background: var(--accent-bg); border-color: #f0c060; }
+.defect-item.checked .check-box { background: var(--accent); border-color: var(--accent); color: #fff; }
+.defect-item.checked .check-label { color: #7a4e00; }
+
+.attn-level-group { display: flex; flex-direction: column; gap: 8px; margin-bottom: 12px; }
+.attn-card {
+  display: flex; align-items: center; gap: 13px;
+  padding: 12px 14px; border-radius: 9px;
+  border: 2px solid var(--border); background: #f8f9fb;
+  cursor: pointer; transition: all 0.18s;
+  user-select: none;
+}
+.attn-card:hover { transform: translateX(2px); }
+.attn-card.selected { box-shadow: 0 3px 12px rgba(0,0,0,0.12); }
+.attn-card.nivel-1.selected { border-color: var(--green); background: var(--green-bg); }
+.attn-card.nivel-2.selected { border-color: var(--accent); background: var(--accent-bg); }
+.attn-card.nivel-3.selected { border-color: var(--red); background: var(--red-bg); }
+.attn-icon { font-size: 22px; flex-shrink: 0; }
+.attn-title { font-family: 'Barlow Condensed', sans-serif; font-weight: 800; font-size: 14px; text-transform: uppercase; color: var(--text); }
+.attn-desc { font-size: 12px; color: var(--muted); line-height: 1.4; }
+
+.obs-field { margin-top: 8px; }
+.obs-field textarea {
+  width: 100%; background: #f8f9fb; border: 1.5px solid var(--border);
+  border-radius: 8px; padding: 10px 12px;
+  font-family: 'Barlow', sans-serif; font-size: 14px; color: var(--text);
+  outline: none; resize: vertical; transition: border-color 0.2s;
+}
+.obs-field textarea:focus { border-color: var(--accent); background: #fff; }
+.obs-char-count { font-size: 11px; color: var(--muted); text-align: right; margin-top: 4px; }
+
+.rules-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; margin-top: 12px; }
+.rule-card {
+  background: #f8f9fb; border: 1px solid var(--border-light);
+  border-radius: 7px; padding: 9px 11px;
+  font-size: 12px; color: var(--text2); display: flex; gap: 8px; align-items: flex-start;
+}
+
+/* ── SHARE BOX ── */
+.share-box {
+  background: linear-gradient(135deg, #1a2235, #253050);
+  border-radius: 12px; padding: 18px 18px 16px;
+  margin-top: 18px;
+}
+.share-box-title {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 800; font-size: 15px;
+  color: #fff; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 4px;
+}
+.share-box-sub { font-size: 12px; color: #8da0bb; margin-bottom: 14px; line-height: 1.4; }
+.share-btns { display: flex; gap: 8px; flex-wrap: wrap; }
+.share-btn {
+  flex: 1; min-width: 120px;
+  padding: 11px 14px;
+  border: none; border-radius: 8px;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 800; font-size: 13px; letter-spacing: 0.5px; text-transform: uppercase;
+  cursor: pointer; transition: all 0.18s;
+  display: flex; align-items: center; justify-content: center; gap: 6px;
+}
+.share-btn:hover { filter: brightness(1.1); transform: translateY(-1px); }
+.share-btn-copy { background: #2a7ecf; color: #fff; }
+.share-btn-share { background: #1a9e55; color: #fff; }
+.share-btn-pdf { background: var(--accent); color: #fff; }
+.share-preview {
+  display: none; margin-top: 12px; background: #0f1620;
+  border-radius: 8px; padding: 12px; font-size: 12px;
+  color: #7db8e0; white-space: pre-wrap; max-height: 250px; overflow-y: auto;
+  line-height: 1.5;
+}
+.share-status {
+  display: none; margin-top: 10px; padding: 9px 12px;
+  border-radius: 7px; font-size: 12.5px; font-weight: 600;
+}
+.share-status.ok { background: rgba(26,158,85,0.15); color: #1a9e55; border: 1px solid rgba(26,158,85,0.3); }
+.share-status.err { background: rgba(199,58,20,0.15); color: #c73a14; border: 1px solid rgba(199,58,20,0.3); }
+.save-indicator {
+  margin-top: 10px; font-size: 11px; color: #6a8a6a;
+  display: flex; align-items: center; gap: 5px;
+}
+
+.completion-screen {
+  display: none; text-align: center; padding: 40px 20px;
+  background: var(--white); border: 1.5px solid var(--green);
+  border-radius: 14px; margin-top: 20px;
+}
+.completion-screen.show { display: block; }
+.completion-icon { font-size: 48px; margin-bottom: 12px; }
+.completion-screen h2 { font-family: 'Barlow Condensed', sans-serif; font-weight: 800; font-size: 22px; color: var(--green); text-transform: uppercase; }
+.completion-screen p { font-size: 13px; color: var(--muted); margin-top: 6px; margin-bottom: 16px; }
+.btn-reset {
+  background: var(--accent); color: #fff; border: none;
+  border-radius: 8px; padding: 12px 24px;
+  font-family: 'Barlow Condensed', sans-serif; font-weight: 800; font-size: 15px;
+  letter-spacing: 0.8px; text-transform: uppercase; cursor: pointer;
+  transition: all 0.18s;
+}
+.btn-reset:hover { filter: brightness(1.1); transform: translateY(-1px); }
+
+footer.footer {
+  background: var(--header-bg); color: #6a7d9a;
+  text-align: center; padding: 14px; font-size: 11px;
+  border-top: 1px solid #2e3f60;
+}
+
+@media (max-width: 560px) {
+  .tk-row { grid-template-columns: 1fr; }
+  .priority-grid { grid-template-columns: 1fr; }
+  .form-row { grid-template-columns: 1fr; }
+  .rules-grid { grid-template-columns: 1fr; }
+  .share-btns { flex-direction: column; }
+  .tk-actions-row { flex-direction: column; }
+}
+</style>
+</head>
+<body>
+
+<header class="header">
+  <div class="header-inner">
+    <div class="logo-block">
+      <div class="logo-icon">🏗️</div>
+      <div class="logo-text">
+        <h1>Maquinarias El Imán</h1>
+        <span>Gerencia de Servicio Técnico</span>
+      </div>
+    </div>
+    <div class="header-meta">
+      <span class="badge active">GUIA-TEC-001</span>
+      <span class="badge">v2.0</span>
+      <span class="badge" id="clock">--:--</span>
+    </div>
+  </div>
+</header>
+
+<nav class="tab-nav">
+  <div class="tab-nav-inner">
+    <button class="tab-btn active" onclick="switchTab('tickets', this)">🎫 Sistema de Tickets</button>
+    <button class="tab-btn" onclick="switchTab('planilla', this)">✅ Planilla de Servicio</button>
+  </div>
+</nav>
+
+<div class="progress-wrap" id="progress-wrap">
+  <div class="progress-inner">
+    <div class="progress-labels">
+      <span>Cumplimiento de Proceso</span>
+      <span class="prog-pct" id="prog-pct">0%</span>
+    </div>
+    <div class="progress-track"><div class="progress-fill" id="prog-fill"></div></div>
+  </div>
+</div>
+
+<main class="main">
+
+  <!-- ══════════ TAB: SISTEMA DE TICKETS ══════════ -->
+  <div class="tab-panel active" id="tab-tickets">
+
+    <div class="tk-hero">
+      <div class="tk-hero-top">
+        <div class="tk-hero-icon">🎫</div>
+        <div>
+          <h2>Sistema de Tickets</h2>
+          <p>Ingeniería Técnica y Control de Calidad — Canal oficial de solicitudes técnicas</p>
+        </div>
+      </div>
+      <div class="tk-meta-row">
+        <span class="tk-meta-chip">SOP-ITCC-001</span>
+        <span class="tk-meta-chip">v1.0 — 20/02/2026</span>
+        <span class="tk-meta-chip">Área: ITCC</span>
+      </div>
+    </div>
+
+    <!-- NÚMERO DE TICKET + ESTADO -->
+    <div class="tk-number-display">
+      <div>
+        <div class="tk-num-label">N° de Ticket</div>
+        <div class="tk-num-val" id="tk-number">TK-----</div>
+      </div>
+      <div style="flex:1; padding-left:10px;">
+        <div class="tk-num-label">Estado</div>
+        <div id="tk-status-text" style="font-size:12px; color:#6ed4a0; font-weight:700; font-family:'Barlow Condensed',sans-serif; letter-spacing:0.5px;">🟢 ABIERTO</div>
+      </div>
+      <div class="tk-num-ts" id="tk-timestamp">--/--/---- --:--</div>
+    </div>
+
+    <!-- FORMULARIO DE TICKET -->
+    <div class="tk-form-card">
+      <div class="tk-form-header">
+        <div class="tk-form-header-icon">👤</div>
+        <div class="tk-form-header-text">
+          <h3>Datos del Solicitante</h3>
+          <span>Información básica de quien genera el ticket</span>
+        </div>
+      </div>
+      <div class="tk-form-body">
+        <div class="tk-row">
+          <div class="tk-field">
+            <label>Nombre del Técnico <span class="req">*</span></label>
+            <input type="text" id="tk-tecnico" placeholder="Nombre completo" autocomplete="name">
+          </div>
+          <div class="tk-field">
+            <label>País / Área <span class="req">*</span></label>
+            <select id="tk-pais">
+              <option value="">Seleccionar...</option>
+              <option>Venezuela</option>
+              <option>Colombia</option>
+              <option>Ecuador</option>
+              <option>Panamá</option>
+              <option>Costa Rica</option>
+              <option>Perú</option>
+              <option>Otro</option>
+            </select>
+          </div>
+        </div>
+        <div class="tk-row">
+          <div class="tk-field">
+            <label>Fecha de Solicitud <span class="req">*</span></label>
+            <input type="date" id="tk-fecha">
+          </div>
+          <div class="tk-field">
+            <label>N° de Orden de Trabajo</label>
+            <input type="text" id="tk-ot" placeholder="OT-00000">
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="tk-form-card">
+      <div class="tk-form-header">
+        <div class="tk-form-header-icon">🔧</div>
+        <div class="tk-form-header-text">
+          <h3>Datos del Equipo y Solicitud</h3>
+          <span>Describe el requerimiento con el mayor detalle posible</span>
+        </div>
+      </div>
+      <div class="tk-form-body">
+        <div class="tk-row">
+          <div class="tk-field">
+            <label>Cliente / Empresa <span class="req">*</span></label>
+            <input type="text" id="tk-cliente" placeholder="Nombre del cliente">
+          </div>
+          <div class="tk-field">
+            <label>Tipo de Equipo <span class="req">*</span></label>
+            <select id="tk-equipo">
+              <option value="">Seleccionar...</option>
+              <option>Montacargas Eléctrico</option>
+              <option>Montacargas Combustión</option>
+              <option>Montacargas Diésel</option>
+              <option>Transpaleta</option>
+              <option>Barredora / Limpieza</option>
+              <option>Elevador / JLG</option>
+              <option>Otro</option>
+            </select>
+          </div>
+        </div>
+        <div class="tk-row">
+          <div class="tk-field">
+            <label>Marca</label>
+            <select id="tk-marca">
+              <option value="">Seleccionar...</option>
+              <option>Hyster</option>
+              <option>Yale</option>
+              <option>Utilev</option>
+              <option>Tennant</option>
+              <option>JLG</option>
+              <option>Otra</option>
+            </select>
+          </div>
+          <div class="tk-field">
+            <label>Tipo de Solicitud <span class="req">*</span></label>
+            <select id="tk-tipo-sol">
+              <option value="">Seleccionar...</option>
+              <option>Soporte Técnico</option>
+              <option>Análisis / Evaluación</option>
+              <option>Validación de Procedimiento</option>
+              <option>Consulta Técnica</option>
+              <option>Reporte de Falla</option>
+              <option>Solicitud de Repuesto</option>
+              <option>Capacitación Técnica</option>
+              <option>Otro</option>
+            </select>
+          </div>
+        </div>
+        <div class="tk-row single">
+          <div class="tk-field">
+            <label>Descripción del Requerimiento <span class="req">*</span></label>
+            <textarea id="tk-descripcion" placeholder="Describe detalladamente el problema o solicitud. Incluye síntomas, condiciones del equipo, qué ocurrió y qué se necesita..."></textarea>
+          </div>
+        </div>
+        <div class="tk-row single">
+          <div class="tk-field">
+            <label>Acciones Previas Realizadas (opcional)</label>
+            <textarea id="tk-acciones" rows="3" placeholder="¿Ya se tomó alguna acción? Describe qué se intentó antes de generar este ticket..."></textarea>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- PRIORIDAD -->
+    <div class="tk-form-card">
+      <div class="tk-form-header">
+        <div class="tk-form-header-icon">🎨</div>
+        <div class="tk-form-header-text">
+          <h3>Prioridad del Ticket</h3>
+          <span>Selecciona según el impacto operacional y urgencia</span>
+        </div>
+      </div>
+      <div class="tk-form-body">
+        <div class="priority-grid" id="priority-grid">
+          <button class="prio-btn" data-p="verde" onclick="selectPriority(this)">
+            <div class="prio-dot"></div>
+            <div class="prio-btn-text">
+              <div class="prio-btn-title">🟢 Verde — Normal</div>
+              <div class="prio-btn-desc">Sin impacto inmediato. Flujo normal de trabajo.</div>
+            </div>
+          </button>
+          <button class="prio-btn" data-p="amarillo" onclick="selectPriority(this)">
+            <div class="prio-dot"></div>
+            <div class="prio-btn-text">
+              <div class="prio-btn-title">🟡 Amarillo — Seguimiento</div>
+              <div class="prio-btn-desc">Anomalías detectadas. Requiere atención priorizada.</div>
+            </div>
+          </button>
+          <button class="prio-btn" data-p="rojo" onclick="selectPriority(this)">
+            <div class="prio-dot"></div>
+            <div class="prio-btn-text">
+              <div class="prio-btn-title">🔴 Rojo — Urgente</div>
+              <div class="prio-btn-desc">Impacto directo en operación. Escalamiento inmediato.</div>
+            </div>
+          </button>
+          <button class="prio-btn" data-p="morado" onclick="selectPriority(this)">
+            <div class="prio-dot"></div>
+            <div class="prio-btn-text">
+              <div class="prio-btn-title">🟣 Morado — Investigación</div>
+              <div class="prio-btn-desc">Requiere análisis técnico profundo antes de actuar.</div>
+            </div>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- ACCIONES -->
+    <div class="section-divider"><span>Guardar y Enviar Ticket</span></div>
+
+    <div class="share-box">
+      <div class="share-box-title">📤 Compartir Ticket</div>
+      <div class="share-box-sub">Genera el resumen del ticket y compártelo por Telegram, correo o descárgalo. Los datos se guardan automáticamente en este dispositivo.</div>
+      <div class="share-btns">
+        <button class="share-btn share-btn-share" onclick="shareCompleto()">📲 Compartir Reporte</button>
+        <button class="share-btn share-btn-pdf" onclick="downloadCompleto()">📥 Descargar Todo</button>
+      </div>
+      <div class="share-preview" id="tk-preview"></div>
+      <div class="share-status" id="tk-status"></div>
+      <div class="save-indicator" id="save-indicator-tk">💾 Guardado automático activo</div>
+    </div>
+
+    <div style="margin-top:14px; text-align:center;">
+      <button class="btn-reset" style="background:#f0f2f5; color:var(--text2); border:1.5px solid var(--border);" onclick="resetTicket()">🔄 Nuevo Ticket</button>
+      &nbsp;
+      <button class="btn-reset" style="background:#1a2235; color:#fff; border:1.5px solid #2e3f60;" id="eng-login-btn" onclick="openEngineerModal()">🔐 Acceso Ingeniero</button>
+    </div>
+
+    <!-- PANEL DEL INGENIERO -->
+    <div id="eng-panel" style="display:none; margin-top:16px; background:linear-gradient(135deg,#1a2235,#243050); border-radius:14px; padding:20px; border:1px solid #2e3f60;">
+      <div style="font-family:'Barlow Condensed',sans-serif; font-weight:800; font-size:16px; color:#fff; text-transform:uppercase; letter-spacing:0.5px; margin-bottom:4px;">⚙️ Panel de Ingeniería Superior</div>
+      <div style="font-size:12px; color:#8da0bb; margin-bottom:14px;">Actualizar estado del ticket · Solo personal autorizado</div>
+      <div style="font-size:12px; color:#c0ccda; margin-bottom:10px; font-family:'Barlow Condensed',sans-serif; font-weight:700; letter-spacing:0.5px; text-transform:uppercase;">Estado actual: <span class="tk-current-status" style="color:#f5c060;">ABIERTO</span></div>
+      <div style="display:flex; gap:8px; flex-wrap:wrap;">
+        <button onclick="setTicketStatus('ABIERTO')" style="flex:1;min-width:100px;padding:11px 12px;background:#fdf1ee;border:2px solid #f0a090;border-radius:8px;font-family:'Barlow Condensed',sans-serif;font-weight:800;font-size:13px;color:#c73a14;cursor:pointer;text-transform:uppercase;">🔴 Abierto</button>
+        <button onclick="setTicketStatus('EN PROCESO')" style="flex:1;min-width:100px;padding:11px 12px;background:#fff8ec;border:2px solid #f0c060;border-radius:8px;font-family:'Barlow Condensed',sans-serif;font-weight:800;font-size:13px;color:#7a4e00;cursor:pointer;text-transform:uppercase;">🟡 En Proceso</button>
+        <button onclick="setTicketStatus('CERRADO')" style="flex:1;min-width:100px;padding:11px 12px;background:#edf8f2;border:2px solid #6ed4a0;border-radius:8px;font-family:'Barlow Condensed',sans-serif;font-weight:800;font-size:13px;color:#126038;cursor:pointer;text-transform:uppercase;">🟢 Cerrado</button>
+      </div>
+      <div id="eng-feedback" style="display:none;margin-top:10px;padding:9px 12px;border-radius:7px;font-size:12.5px;font-weight:600;background:rgba(26,158,85,0.15);color:#1a9e55;border:1px solid rgba(26,158,85,0.3);"></div>
+    </div>
+
+  </div><!-- /tab-tickets -->
+
+
+  <!-- ══════════ TAB: PLANILLA DE SERVICIO ══════════ -->
+  <div class="tab-panel" id="tab-planilla">
+
+    <div class="alert-banner">
+      <span class="icon">⚠️</span>
+      <p>
+        <strong>ACTUALIZACIÓN OBLIGATORIA v2.0 —</strong>
+        El Paso 0 (Verificación Previa de Alistamiento) es ahora <strong>obligatorio</strong> antes de iniciar cualquier servicio en campo o taller. El incumplimiento genera <strong>NO CONFORMIDAD</strong>.
+      </p>
+    </div>
+
+    <!-- DATOS DEL SERVICIO -->
+    <div class="step-section">
+      <div class="step-card" id="card-info">
+        <div class="step-header" onclick="toggleCard('info')">
+          <div class="step-num num-1">📋</div>
+          <div class="step-title-block">
+            <div class="step-label">Inicio del Protocolo</div>
+            <div class="step-title">Datos del Servicio</div>
+          </div>
+          <div class="step-status" id="status-info"></div>
+          <div class="step-icon-right">▼</div>
+        </div>
+        <div class="step-body open" id="body-info">
+          <div class="form-row">
+            <div class="form-field">
+              <label>Técnico responsable</label>
+              <input type="text" placeholder="Nombre completo" id="f-tecnico">
+            </div>
+            <div class="form-field">
+              <label>Fecha de servicio</label>
+              <input type="date" id="f-fecha">
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-field">
+              <label>Número de O/T</label>
+              <input type="text" placeholder="OT-00000" id="f-ot">
+            </div>
+            <div class="form-field">
+              <label>Cliente / Empresa</label>
+              <input type="text" placeholder="Nombre del cliente" id="f-cliente">
+            </div>
+          </div>
+          <div class="form-field" style="margin-top:10px;">
+            <label>Tipo de Equipo</label>
+            <div class="equip-select-group">
+              <button class="equip-btn" onclick="selectEquip(this)">🔋 Montacargas Eléctrico</button>
+              <button class="equip-btn" onclick="selectEquip(this)">⛽ Montacargas Combustión</button>
+              <button class="equip-btn" onclick="selectEquip(this)">🛢️ Montacargas Diésel</button>
+              <button class="equip-btn" onclick="selectEquip(this)">🔧 Transpaleta</button>
+              <button class="equip-btn" onclick="selectEquip(this)">🧹 Barredora / Limpieza</button>
+              <button class="equip-btn" onclick="selectEquip(this)">⬆️ Elevador / JLG</button>
+              <button class="equip-btn" onclick="selectEquip(this, true)">📦 Otros</button>
+            </div>
+            <div id="otros-equip-wrap" style="display:none;margin-top:8px;">
+              <input type="text" id="otros-equip-input" placeholder="Especificar tipo de equipo..." style="width:100%;background:#f8f9fb;border:1.5px solid var(--accent);border-radius:7px;padding:10px 12px;font-family:'Barlow',sans-serif;font-size:16px;color:var(--text);outline:none;">
+            </div>
+          </div>
+          <div class="form-row" style="margin-top:10px;">
+            <div class="form-field">
+              <label>Marca</label>
+              <select id="f-marca">
+                <option value="">Seleccionar...</option>
+                <option>Hyster</option><option>Yale</option><option>Utilev</option>
+                <option>Tennant</option><option>JLG</option>
+              </select>
+            </div>
+            <div class="form-field">
+              <label>Tipo de Servicio</label>
+              <select id="f-tipo-serv">
+                <option value="">Seleccionar...</option>
+                <option>Mantenimiento Preventivo</option>
+                <option>Reparación Correctiva</option>
+                <option>Inspección</option>
+                <option>Servicio en Alquiler</option>
+                <option>Revisión Diagnóstica</option>
+              </select>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- PASO 0 -->
+    <div class="step-section">
+      <div class="step-card" id="card-0">
+        <div class="step-header" onclick="toggleCard(0)">
+          <div class="step-num num-0">0</div>
+          <div class="step-title-block">
+            <div class="step-label">OBLIGATORIO — STD-SRV-001 | STD-HER-001</div>
+            <div class="step-title">Verificación Previa de Alistamiento</div>
+          </div>
+          <div class="step-status" id="status-0"></div>
+          <div class="step-icon-right">▶</div>
+        </div>
+        <div class="step-body" id="body-0">
+          <div class="paso0-highlight">
+            <h4>⛔ Punto de Control Crítico</h4>
+            <p>Antes de salir a cualquier servicio el técnico <strong>DEBE</strong> completar esta verificación. Si el Paso 0 no se completa, el servicio es <strong>NO CONFORME</strong>.</p>
+          </div>
+          <p class="step-intro">4.1 — Herramientas y Recursos</p>
+          <ul class="checklist">
+            <li><div class="check-item" onclick="toggleCheck(this,'0')"><div class="check-box">✓</div><span class="check-label">Herramientas mínimas requeridas para la tarea están completas y operativas</span></div></li>
+            <li><div class="check-item" onclick="toggleCheck(this,'0')"><div class="check-box">✓</div><span class="check-label">Herramientas de medición operativas (multímetro, etc.)</span></div></li>
+            <li><div class="check-item" onclick="toggleCheck(this,'0')"><div class="check-box">✓</div><span class="check-label">Equipos electrónicos con batería suficiente (laptop, tablet, teléfono)</span></div></li>
+          </ul>
+          <p class="step-intro">4.2 — Materiales e Insumos</p>
+          <ul class="checklist">
+            <li><div class="check-item" onclick="toggleCheck(this,'0')"><div class="check-box">✓</div><span class="check-label">Repuestos, consumibles o insumos asignados por almacén recibidos y verificados</span></div></li>
+            <li><div class="check-item" onclick="toggleCheck(this,'0')"><div class="check-box">✓</div><span class="check-label">Materiales especiales requeridos para la tarea confirmados</span></div></li>
+          </ul>
+          <p class="step-intro">4.3 — Seguridad Básica (EPP)</p>
+          <ul class="checklist">
+            <li><div class="check-item" onclick="toggleCheck(this,'0')"><div class="check-box">✓</div><span class="check-label">EPP mínimo requerido según tipo de trabajo disponible y en buen estado</span></div></li>
+            <li><div class="check-item" onclick="toggleCheck(this,'0')"><div class="check-box">✓</div><span class="check-label">Condiciones iniciales seguras para ejecutar la tarea verificadas</span></div></li>
+          </ul>
+          <p class="step-intro">4.4 — Información del Servicio</p>
+          <ul class="checklist">
+            <li><div class="check-item" onclick="toggleCheck(this,'0')"><div class="check-box">✓</div><span class="check-label">Datos del equipo conocidos (marca, modelo, número de serie)</span></div></li>
+            <li><div class="check-item" onclick="toggleCheck(this,'0')"><div class="check-box">✓</div><span class="check-label">Ubicación del cliente confirmada</span></div></li>
+            <li><div class="check-item" onclick="toggleCheck(this,'0')"><div class="check-box">✓</div><span class="check-label">Tipo de servicio asignado claro y comprendido</span></div></li>
+            <li><div class="check-item" onclick="toggleCheck(this,'0')"><div class="check-box">✓</div><span class="check-label">Permisos o autorizaciones especiales gestionados (flota externa, accesos)</span></div></li>
+          </ul>
+          <div class="nc-pill">⛔ Servicio sin completar el Paso 0 = NO CONFORME</div>
+          <div class="ref-row">
+            <span class="ref-tag">STD-HER-001</span>
+            <span class="ref-tag">STD-SRV-001</span>
+            <span class="ref-tag">STD-SOP-001</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="section-divider"><span>Ejecución del Servicio — Campo / Taller</span></div>
+
+    <!-- PASO 1 -->
+    <div class="step-section">
+      <div class="step-card" id="card-1">
+        <div class="step-header" onclick="toggleCard(1)">
+          <div class="step-num num-1">1</div>
+          <div class="step-title-block">
+            <div class="step-label">STD-SRV-001</div>
+            <div class="step-title">Reporte de Llegada</div>
+          </div>
+          <div class="step-status" id="status-1"></div>
+          <div class="step-icon-right">▶</div>
+        </div>
+        <div class="step-body" id="body-1">
+          <ul class="checklist">
+            <li><div class="check-item" onclick="toggleCheck(this,'1')"><div class="check-box">✓</div><span class="check-label">Llegada al sitio reportada mediante el <strong>Grupo de Telegram correspondiente</strong>, indicando hora de llegada</span></div></li>
+          </ul>
+          <div class="ref-row"><span class="ref-tag">STD-SRV-001</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- PASO 2 -->
+    <div class="step-section">
+      <div class="step-card" id="card-2">
+        <div class="step-header" onclick="toggleCard(2)">
+          <div class="step-num num-2">2</div>
+          <div class="step-title-block">
+            <div class="step-label">STD-DIA-001</div>
+            <div class="step-title">Levantamiento de Información</div>
+          </div>
+          <div class="step-status" id="status-2"></div>
+          <div class="step-icon-right">▶</div>
+        </div>
+        <div class="step-body" id="body-2">
+          <p class="step-intro">Consultar al encargado y operador sobre:</p>
+          <ul class="checklist">
+            <li><div class="check-item" onclick="toggleCheck(this,'2')"><div class="check-box">✓</div><span class="check-label">Anomalías reportadas por el cliente documentadas</span></div></li>
+            <li><div class="check-item" onclick="toggleCheck(this,'2')"><div class="check-box">✓</div><span class="check-label">Funcionamiento actual del equipo evaluado junto al operador</span></div></li>
+          </ul>
+          <div class="ref-row"><span class="ref-tag">STD-DIA-001</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- PASO 3 -->
+    <div class="step-section">
+      <div class="step-card" id="card-3">
+        <div class="step-header" onclick="toggleCard(3)">
+          <div class="step-num num-3">3</div>
+          <div class="step-title-block">
+            <div class="step-label">STD-DIA-001 | STD-ELE-001</div>
+            <div class="step-title">Verificación Inicial y Evidencias</div>
+          </div>
+          <div class="step-status" id="status-3"></div>
+          <div class="step-icon-right">▶</div>
+        </div>
+        <div class="step-body" id="body-3">
+          <ul class="checklist">
+            <li><div class="check-item" onclick="toggleCheck(this,'3')"><div class="check-box">✓</div><span class="check-label">Funcionamiento inicial del equipo verificado</span></div></li>
+            <li><div class="check-item" onclick="toggleCheck(this,'3')"><div class="check-box">✓</div><span class="check-label">Evidencias fotográficas del estado inicial tomadas</span></div></li>
+            <li><div class="check-item" onclick="toggleCheck(this,'3')"><div class="check-box">✓</div><span class="check-label">Fotos enviadas al grupo de Telegram correspondiente</span></div></li>
+          </ul>
+          <div class="ref-row"><span class="ref-tag">STD-DIA-001</span><span class="ref-tag">STD-ELE-001</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- PASO 4 -->
+    <div class="step-section">
+      <div class="step-card" id="card-4">
+        <div class="step-header" onclick="toggleCard(4)">
+          <div class="step-num num-4">4</div>
+          <div class="step-title-block">
+            <div class="step-label">STD-SOP-001</div>
+            <div class="step-title">Fallas Adicionales</div>
+          </div>
+          <div class="step-status" id="status-4"></div>
+          <div class="step-icon-right">▶</div>
+        </div>
+        <div class="step-body" id="body-4">
+          <ul class="checklist">
+            <li><div class="check-item" onclick="toggleCheck(this,'4')"><div class="check-box">✓</div><span class="check-label">Toda falla adicional detectada informada al supervisor</span></div></li>
+            <li><div class="check-item" onclick="toggleCheck(this,'4')"><div class="check-box">✓</div><span class="check-label">Autorización solicitada antes de intervenir (cuando aplique: flota externa)</span></div></li>
+          </ul>
+          <p class="step-intro" style="margin-top:12px;">4.B — Deficiencias o Defectos Observados por el Técnico (no reportados por el cliente)</p>
+          <p style="font-size:12px;color:var(--muted);padding:5px 0 7px;">Marque todas las que apliquen.</p>
+          <ul class="checklist defect-list">
+            <li><div class="check-item defect-item" onclick="toggleCheck(this,'4')"><div class="check-box">✓</div><span class="check-label">⚠️ Desgaste anormal de neumáticos o ruedas</span></div></li>
+            <li><div class="check-item defect-item" onclick="toggleCheck(this,'4')"><div class="check-box">✓</div><span class="check-label">⚠️ Fuga de fluidos (hidráulico, aceite, combustible, refrigerante)</span></div></li>
+            <li><div class="check-item defect-item" onclick="toggleCheck(this,'4')"><div class="check-box">✓</div><span class="check-label">⚠️ Daños estructurales visibles (chasis, mástil, horquillas)</span></div></li>
+            <li><div class="check-item defect-item" onclick="toggleCheck(this,'4')"><div class="check-box">✓</div><span class="check-label">⚠️ Sistema eléctrico con cables sueltos, quemados o en mal estado</span></div></li>
+            <li><div class="check-item defect-item" onclick="toggleCheck(this,'4')"><div class="check-box">✓</div><span class="check-label">⚠️ Batería o sistema de carga con anomalías no reportadas</span></div></li>
+            <li><div class="check-item defect-item" onclick="toggleCheck(this,'4')"><div class="check-box">✓</div><span class="check-label">⚠️ Frenos o sistema de dirección con deficiencias</span></div></li>
+            <li><div class="check-item defect-item" onclick="toggleCheck(this,'4')"><div class="check-box">✓</div><span class="check-label">⚠️ Luces, alarmas o señales de seguridad inoperativas</span></div></li>
+            <li><div class="check-item defect-item" onclick="toggleCheck(this,'4')"><div class="check-box">✓</div><span class="check-label">⚠️ Contaminación o suciedad crítica en componentes internos</span></div></li>
+            <li><div class="check-item defect-item" onclick="toggleCheck(this,'4')"><div class="check-box">✓</div><span class="check-label">✅ Sin deficiencias adicionales observadas por el técnico</span></div></li>
+          </ul>
+          <div class="ref-row"><span class="ref-tag">STD-SOP-001</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- PASO 5 -->
+    <div class="step-section">
+      <div class="step-card" id="card-5">
+        <div class="step-header" onclick="toggleCard(5)">
+          <div class="step-num num-5">5</div>
+          <div class="step-title-block">
+            <div class="step-label">STD-SEG-001</div>
+            <div class="step-title">Acondicionamiento del Área de Trabajo</div>
+          </div>
+          <div class="step-status" id="status-5"></div>
+          <div class="step-icon-right">▶</div>
+        </div>
+        <div class="step-body" id="body-5">
+          <ul class="checklist">
+            <li><div class="check-item" onclick="toggleCheck(this,'5')"><div class="check-box">✓</div><span class="check-label">Equipo ubicado en área adecuada y segura para la intervención</span></div></li>
+            <li><div class="check-item" onclick="toggleCheck(this,'5')"><div class="check-box">✓</div><span class="check-label">Área de trabajo delimitada y despejada</span></div></li>
+          </ul>
+          <div class="ref-row"><span class="ref-tag">STD-SEG-001</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- PASO 6 -->
+    <div class="step-section">
+      <div class="step-card" id="card-6">
+        <div class="step-header" onclick="toggleCard(6)">
+          <div class="step-num num-6">6</div>
+          <div class="step-title-block">
+            <div class="step-label">STD-DIA-001 | STD-ELE-001 | STD-TAL-001</div>
+            <div class="step-title">Ejecución del Servicio</div>
+          </div>
+          <div class="step-status" id="status-6"></div>
+          <div class="step-icon-right">▶</div>
+        </div>
+        <div class="step-body" id="body-6">
+          <ul class="checklist">
+            <li><div class="check-item" onclick="toggleCheck(this,'6')"><div class="check-box">✓</div><span class="check-label">Rutina asignada ejecutada conforme al instructivo técnico</span></div></li>
+            <li><div class="check-item" onclick="toggleCheck(this,'6')"><div class="check-box">✓</div><span class="check-label">Estándares técnicos aplicados durante toda la ejecución</span></div></li>
+            <li><div class="check-item" onclick="toggleCheck(this,'6')"><div class="check-box">✓</div><span class="check-label">Materiales utilizados corresponden a los asignados por almacén</span></div></li>
+          </ul>
+          <div class="ref-row"><span class="ref-tag">STD-DIA-001</span><span class="ref-tag">STD-ELE-001</span><span class="ref-tag">STD-TAL-001</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- PASO 7 -->
+    <div class="step-section">
+      <div class="step-card" id="card-7">
+        <div class="step-header" onclick="toggleCard(7)">
+          <div class="step-num num-7">7</div>
+          <div class="step-title-block">
+            <div class="step-label">STD-SRV-001</div>
+            <div class="step-title">Pruebas Finales y Validación</div>
+          </div>
+          <div class="step-status" id="status-7"></div>
+          <div class="step-icon-right">▶</div>
+        </div>
+        <div class="step-body" id="body-7">
+          <ul class="checklist">
+            <li><div class="check-item" onclick="toggleCheck(this,'7')"><div class="check-box">✓</div><span class="check-label">Pruebas funcionales del equipo realizadas y satisfactorias</span></div></li>
+            <li><div class="check-item" onclick="toggleCheck(this,'7')"><div class="check-box">✓</div><span class="check-label">Pruebas solicitadas y aprobadas por el cliente</span></div></li>
+          </ul>
+          <div class="ref-row"><span class="ref-tag">STD-SRV-001</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- PASO 8 -->
+    <div class="step-section">
+      <div class="step-card" id="card-8">
+        <div class="step-header" onclick="toggleCard(8)">
+          <div class="step-num num-8">8</div>
+          <div class="step-title-block">
+            <div class="step-label">STD-SRV-001 — OBLIGATORIO</div>
+            <div class="step-title">Reporte de Servicio</div>
+          </div>
+          <div class="step-status" id="status-8"></div>
+          <div class="step-icon-right">▶</div>
+        </div>
+        <div class="step-body" id="body-8">
+          <ul class="checklist">
+            <li><div class="check-item" onclick="toggleCheck(this,'8')"><div class="check-box">✓</div><span class="check-label">Reporte de Servicio completado con todos los datos requeridos</span></div></li>
+            <li><div class="check-item" onclick="toggleCheck(this,'8')"><div class="check-box">✓</div><span class="check-label">Actividades realizadas detalladas en el reporte</span></div></li>
+            <li><div class="check-item" onclick="toggleCheck(this,'8')"><div class="check-box">✓</div><span class="check-label">Evidencias fotográficas adjuntadas al reporte</span></div></li>
+            <li><div class="check-item" onclick="toggleCheck(this,'8')"><div class="check-box">✓</div><span class="check-label">Firma de recibido conforme solicitada y obtenida del cliente</span></div></li>
+          </ul>
+          <div class="ref-row"><span class="ref-tag">STD-SRV-001</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- PASO 9 -->
+    <div class="step-section">
+      <div class="step-card" id="card-9">
+        <div class="step-header" onclick="toggleCard(9)">
+          <div class="step-num num-9">9</div>
+          <div class="step-title-block">
+            <div class="step-label">STD-AUD-001</div>
+            <div class="step-title">Evidencias del Área Final</div>
+          </div>
+          <div class="step-status" id="status-9"></div>
+          <div class="step-icon-right">▶</div>
+        </div>
+        <div class="step-body" id="body-9">
+          <ul class="checklist">
+            <li><div class="check-item" onclick="toggleCheck(this,'9')"><div class="check-box">✓</div><span class="check-label">Evidencias fotográficas del estado final del área de trabajo tomadas</span></div></li>
+            <li><div class="check-item" onclick="toggleCheck(this,'9')"><div class="check-box">✓</div><span class="check-label">Fotos del área final enviadas al grupo de Telegram</span></div></li>
+          </ul>
+          <div class="ref-row"><span class="ref-tag">STD-AUD-001</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- PASO 10 -->
+    <div class="step-section">
+      <div class="step-card" id="card-10">
+        <div class="step-header" onclick="toggleCard(10)">
+          <div class="step-num num-10">10</div>
+          <div class="step-title-block">
+            <div class="step-label">STD-SRV-001 | STD-AUD-001</div>
+            <div class="step-title">Reporte de Salida</div>
+          </div>
+          <div class="step-status" id="status-10"></div>
+          <div class="step-icon-right">▶</div>
+        </div>
+        <div class="step-body" id="body-10">
+          <ul class="checklist">
+            <li><div class="check-item" onclick="toggleCheck(this,'10')"><div class="check-box">✓</div><span class="check-label">Salida reportada mediante Telegram con estatus final del equipo</span></div></li>
+            <li><div class="check-item" onclick="toggleCheck(this,'10')"><div class="check-box">✓</div><span class="check-label">Todo inconveniente o desviación detectada notificada al supervisor o a Ingeniería Técnica y CC</span></div></li>
+          </ul>
+          <div class="rules-grid">
+            <div class="rule-card"><span>✅</span><span>Todo servicio debe seguir este orden de pasos sin excepción</span></div>
+            <div class="rule-card"><span>📋</span><span>El Reporte de Servicio es obligatorio en todos los casos</span></div>
+            <div class="rule-card"><span>📱</span><span>Telegram es el canal oficial de evidencia operativa</span></div>
+            <div class="rule-card"><span>⛔</span><span>Servicio sin evidencias o sin Paso 0 = <strong>NO CONFORME</strong></span></div>
+          </div>
+          <div class="ref-row"><span class="ref-tag">STD-SRV-001</span><span class="ref-tag">STD-AUD-001</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- OBSERVACIONES Y NIVEL DE ATENCIÓN -->
+    <div class="step-section" id="section-obs">
+      <div class="step-card" id="card-obs" style="border-color:var(--accent);">
+        <div class="step-header" onclick="toggleCard('obs')">
+          <div class="step-num num-2" style="background:var(--accent-bg);color:var(--accent);border-color:#f0c878;">📝</div>
+          <div class="step-title-block">
+            <div class="step-label">Cierre del Servicio</div>
+            <div class="step-title">Observaciones, Nivel de Atención y Envío</div>
+          </div>
+          <div class="step-status" id="status-obs"></div>
+          <div class="step-icon-right">▼</div>
+        </div>
+        <div class="step-body open" id="body-obs">
+          <p class="step-intro">Nivel de Atención Requerido</p>
+          <p style="font-size:12px;color:var(--muted);padding:3px 0 9px;">El técnico selecciona el nivel según la urgencia observada.</p>
+          <div class="attn-level-group">
+            <div class="attn-card nivel-1" onclick="selectAttn(this, 1)">
+              <div class="attn-icon">🟢</div>
+              <div class="attn-info">
+                <div class="attn-title">Nivel 1 — Normal</div>
+                <div class="attn-desc">Servicio concluido sin novedad. No se requiere atención especial ni seguimiento urgente.</div>
+              </div>
+            </div>
+            <div class="attn-card nivel-2" onclick="selectAttn(this, 2)">
+              <div class="attn-icon">🟡</div>
+              <div class="attn-info">
+                <div class="attn-title">Nivel 2 — Requiere Seguimiento</div>
+                <div class="attn-desc">Se detectaron anomalías menores o fallas secundarias. Requiere revisión por supervisor antes del próximo servicio.</div>
+              </div>
+            </div>
+            <div class="attn-card nivel-3" onclick="selectAttn(this, 3)">
+              <div class="attn-icon">🔴</div>
+              <div class="attn-info">
+                <div class="attn-title">Nivel 3 — Atención Urgente</div>
+                <div class="attn-desc">Situación crítica detectada. Requiere revisión inmediata por superiores o escalamiento antes de continuar operaciones.</div>
+              </div>
+            </div>
+          </div>
+
+          <p class="step-intro" style="margin-top:16px;">Observaciones y Comentarios del Técnico</p>
+          <div class="obs-field">
+            <textarea id="obs-textarea" placeholder="Registre aquí cualquier observación, comentario, novedad o información relevante del servicio que no esté contemplada en los pasos anteriores..." rows="5"></textarea>
+            <div class="obs-char-count"><span id="obs-chars">0</span> caracteres</div>
+          </div>
+
+          <!-- SHARE BOX PLANILLA -->
+          <div class="share-box" style="margin-top:18px;">
+            <div class="share-box-title">📤 Guardar y Compartir Reporte</div>
+            <div class="share-box-sub">Genera el resumen del servicio y compártelo por Telegram, correo o descárgalo. Los datos se guardan automáticamente.</div>
+            <div class="share-btns">
+              <button class="share-btn share-btn-share" onclick="shareCompleto()">📲 Compartir Reporte</button>
+              <button class="share-btn share-btn-pdf" onclick="downloadCompleto()">📥 Descargar Todo</button>
+            </div>
+            <div class="share-preview" id="planilla-preview"></div>
+            <div class="share-status" id="planilla-status"></div>
+            <div class="save-indicator" id="save-indicator-pl">💾 Guardado automático activo</div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <div class="completion-screen" id="completion">
+      <div class="completion-icon">✅</div>
+      <h2>Servicio Completado</h2>
+      <p>Todos los pasos del protocolo GUIA-TEC-001 han sido completados correctamente.<br>El servicio está documentado y conforme.</p>
+      <button class="btn-reset" onclick="resetPlanilla()">Nuevo Servicio</button>
+    </div>
+
+  </div><!-- /tab-planilla -->
+
+</main>
+
+<footer class="footer">
+  <strong>GUIA-TEC-001 v2.0</strong> — Área responsable: Ingeniería Técnica y Control de Calidad · Maquinarias El Imán
+</footer>
+
+<script>
+  /* ── CLOCK ── */
+  function updateClock() {
+    var now = new Date();
+    document.getElementById('clock').textContent =
+      String(now.getHours()).padStart(2,'0') + ':' + String(now.getMinutes()).padStart(2,'0');
+  }
+  updateClock();
+  setInterval(updateClock, 10000);
+
+  var pad = function(n){ return String(n).padStart(2,'0'); };
+  var d = new Date();
+  var todayStr = d.getFullYear()+'-'+pad(d.getMonth()+1)+'-'+pad(d.getDate());
+  document.getElementById('f-fecha').value = todayStr;
+  document.getElementById('tk-fecha').value = todayStr;
+
+  /* ══════════════════════════════════════
+     SISTEMA DE NUMERACIÓN PERSISTENTE
+  ══════════════════════════════════════ */
+  var COUNTER_KEY = 'imanTicketCounter_v1';
+  var currentTicketNum = '';
+  var ticketLocked = false; // se bloquea después de compartir
+
+  function getNextTicketNumber() {
+    var counter = 0;
+    try {
+      var stored = localStorage.getItem(COUNTER_KEY);
+      if (stored) counter = parseInt(stored) || 0;
+    } catch(e){}
+    counter += 1;
+    try { localStorage.setItem(COUNTER_KEY, String(counter)); } catch(e){}
+    return 'TK-' + String(counter).padStart(4, '0');
+  }
+
+  function initTicketNumber() {
+    // Si ya hay un ticket guardado en sesión, restaurarlo
+    try {
+      var tk = JSON.parse(localStorage.getItem(TK_KEY));
+      if (tk && tk.ticketNum) {
+        currentTicketNum = tk.ticketNum;
+        document.getElementById('tk-number').textContent = currentTicketNum;
+        return;
+      }
+    } catch(e){}
+    currentTicketNum = getNextTicketNumber();
+    document.getElementById('tk-number').textContent = currentTicketNum;
+  }
+
+  function updateTimestamp() {
+    var now = new Date();
+    document.getElementById('tk-timestamp').textContent =
+      pad(now.getDate())+'/'+pad(now.getMonth()+1)+'/'+now.getFullYear()+' '+
+      pad(now.getHours())+':'+pad(now.getMinutes());
+  }
+
+  /* ══════════════════════════════════════
+     LOCK DEL FORMULARIO TRAS COMPARTIR
+  ══════════════════════════════════════ */
+  function lockAllForms() {
+    ticketLocked = true;
+    // Bloquear todos los inputs, selects, textareas y botones de formulario
+    document.querySelectorAll('#tab-tickets input, #tab-tickets select, #tab-tickets textarea').forEach(function(el){
+      el.disabled = true; el.style.opacity = '0.7';
+    });
+    document.querySelectorAll('.prio-btn').forEach(function(b){ b.style.pointerEvents='none'; b.style.opacity='0.7'; });
+    document.querySelectorAll('#tab-planilla input, #tab-planilla select, #tab-planilla textarea').forEach(function(el){
+      el.disabled = true; el.style.opacity = '0.7';
+    });
+    document.querySelectorAll('.equip-btn, .attn-card, .check-item').forEach(function(el){
+      el.style.pointerEvents='none'; el.style.cursor='default';
+    });
+    // Mostrar aviso de bloqueo
+    var banner = document.createElement('div');
+    banner.id = 'lock-banner';
+    banner.style.cssText = 'position:fixed;top:0;left:0;right:0;z-index:9999;background:#c73a14;color:#fff;text-align:center;padding:10px 16px;font-family:Barlow Condensed,sans-serif;font-weight:800;font-size:14px;letter-spacing:0.5px;';
+    banner.textContent = '🔒 REPORTE COMPARTIDO — El formulario está bloqueado. Para modificar, crea un nuevo ticket.';
+    document.body.insertBefore(banner, document.body.firstChild);
+  }
+
+  /* ══════════════════════════════════════
+     GENERADOR DE REPORTE COMPLETO HTML
+  ══════════════════════════════════════ */
+  function buildFullReportHTML(ticketStatus) {
+    ticketStatus = ticketStatus || 'ABIERTO';
+
+    // Datos ticket
+    var tecnico = document.getElementById('tk-tecnico').value || '—';
+    var fecha = document.getElementById('tk-fecha').value || '—';
+    var pais = document.getElementById('tk-pais').value || '—';
+    var ot = document.getElementById('tk-ot').value || '—';
+    var cliente = document.getElementById('tk-cliente').value || '—';
+    var equipo = document.getElementById('tk-equipo').value || '—';
+    var marca = document.getElementById('tk-marca').value || '—';
+    var tipoSol = document.getElementById('tk-tipo-sol').value || '—';
+    var desc = document.getElementById('tk-descripcion').value || '—';
+    var acciones = document.getElementById('tk-acciones').value || '—';
+    var prioLabels = { verde: '🟢 Verde — Normal', amarillo: '🟡 Amarillo — Seguimiento', rojo: '🔴 Rojo — Urgente', morado: '🟣 Morado — Investigación' };
+    var prio = selectedPriority ? prioLabels[selectedPriority] : '⚠️ No seleccionada';
+    var prioColor = { verde:'#edf8f2', amarillo:'#fff8ec', rojo:'#fdf1ee', morado:'#f3eefb' };
+    var pc = selectedPriority ? prioColor[selectedPriority] : '#f8f9fb';
+
+    // Datos planilla
+    var ptecnico = document.getElementById('f-tecnico').value || '—';
+    var pfecha = document.getElementById('f-fecha').value || '—';
+    var pot = document.getElementById('f-ot').value || '—';
+    var pcliente = document.getElementById('f-cliente').value || '—';
+    var equipBtn = document.querySelector('.equip-btn.selected');
+    var pequip = equipBtn ? equipBtn.textContent.trim() : '—';
+    var pequipOtros = document.getElementById('otros-equip-input').value || '';
+    var pequipFinal = pequip.indexOf('Otros') >= 0 ? 'Otros: ' + pequipOtros : pequip;
+    var pmarca = document.getElementById('f-marca').value || '—';
+    var ptipoServ = document.getElementById('f-tipo-serv').value || '—';
+    var pobs = document.getElementById('obs-textarea').value || '—';
+    var all = document.querySelectorAll('#tab-planilla .check-item');
+    var done = document.querySelectorAll('#tab-planilla .check-item.checked');
+    var pct = all.length ? Math.round((done.length/all.length)*100) : 0;
+    var defects = [];
+    document.querySelectorAll('.defect-item.checked .check-label').forEach(function(el){
+      defects.push('<li style="margin-bottom:4px;">' + el.textContent.trim() + '</li>');
+    });
+    var nivelLabels = { 1:'🟢 Nivel 1 — Normal', 2:'🟡 Nivel 2 — Requiere Seguimiento', 3:'🔴 Nivel 3 — Atención Urgente' };
+    var nivel = selectedAttnLevel ? nivelLabels[selectedAttnLevel] : '⚠️ No seleccionado';
+    var nc = selectedAttnLevel===1?'#edf8f2':selectedAttnLevel===2?'#fff8ec':'#fdf1ee';
+
+    // Build checklist detail
+    var checklistHTML = '';
+    var steps = ['0','1','2','3','4','5','6','7','8','9','10'];
+    var stepNames = {
+      '0':'Verificación Previa de Alistamiento',
+      '1':'Reporte de Llegada',
+      '2':'Levantamiento de Información',
+      '3':'Verificación Inicial y Evidencias',
+      '4':'Fallas Adicionales',
+      '5':'Acondicionamiento del Área',
+      '6':'Ejecución del Servicio',
+      '7':'Pruebas Finales y Validación',
+      '8':'Limpieza y Orden del Área',
+      '9':'Registro Fotográfico Final',
+      '10':'Reporte de Salida'
+    };
+    steps.forEach(function(s){
+      var body = document.getElementById('body-'+s);
+      if (!body) return;
+      var items = body.querySelectorAll('.check-item');
+      if (!items.length) return;
+      var checkedCount = body.querySelectorAll('.check-item.checked').length;
+      checklistHTML += '<tr style="background:#f0f2f5;"><td colspan="2" style="padding:8px 10px;font-weight:800;font-size:12px;text-transform:uppercase;letter-spacing:0.5px;color:#1a2235;">Paso ' + s + ' — ' + (stepNames[s]||'') + ' (' + checkedCount + '/' + items.length + ')</td></tr>';
+      items.forEach(function(item){
+        var checked = item.classList.contains('checked');
+        var label = item.querySelector('.check-label');
+        if (!label) return;
+        checklistHTML += '<tr><td style="width:32px;text-align:center;font-size:16px;">' + (checked ? '✅' : '⬜') + '</td><td style="font-size:12px;color:#3d4655;padding:5px 8px;">' + label.textContent.trim() + '</td></tr>';
+      });
+    });
+
+    var statusColor = ticketStatus==='CERRADO' ? '#1a9e55' : ticketStatus==='EN PROCESO' ? '#c97d08' : '#c73a14';
+    var statusBg = ticketStatus==='CERRADO' ? '#edf8f2' : ticketStatus==='EN PROCESO' ? '#fff8ec' : '#fdf1ee';
+
+    return '<!DOCTYPE html><html lang="es"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">' +
+    '<title>Reporte ' + currentTicketNum + ' — Maquinarias El Imán</title>' +
+    '<style>' +
+    'body{font-family:Arial,sans-serif;max-width:780px;margin:0 auto;padding:24px;color:#1a1f2b;background:#f5f6f8;}' +
+    '.header{background:#1a2235;color:#fff;padding:22px 26px;border-radius:14px;margin-bottom:20px;border-bottom:4px solid #c97d08;}' +
+    '.header h1{font-size:20px;margin:0 0 4px;text-transform:uppercase;letter-spacing:1px;}' +
+    '.header .sub{font-size:12px;color:#8da0bb;}' +
+    '.tk-num{font-size:30px;font-weight:900;color:#c97d08;font-family:monospace;margin-top:8px;letter-spacing:2px;}' +
+    '.status-badge{display:inline-block;padding:5px 14px;border-radius:6px;font-weight:800;font-size:14px;background:'+statusBg+';color:'+statusColor+';border:2px solid '+statusColor+';margin-top:8px;}' +
+    '.section-title{font-size:13px;font-weight:900;text-transform:uppercase;letter-spacing:2px;color:#6b7585;padding:14px 0 4px;border-top:2px solid #c97d08;margin-top:20px;margin-bottom:10px;}' +
+    '.card{background:#fff;border:1.5px solid #d8dce4;border-radius:10px;padding:16px 18px;margin-bottom:14px;}' +
+    '.card h2{font-size:11px;text-transform:uppercase;letter-spacing:1.5px;color:#6b7585;border-bottom:1px solid #eaecf0;padding-bottom:6px;margin-bottom:12px;}' +
+    'table{width:100%;border-collapse:collapse;}' +
+    'td{padding:7px 10px;border-bottom:1px solid #eaecf0;font-size:13px;vertical-align:top;}' +
+    'td:first-child{font-weight:700;color:#3d4655;width:38%;}' +
+    '.prio{padding:10px 16px;border-radius:8px;font-weight:800;font-size:14px;background:'+pc+';}' +
+    '.nivel{padding:10px 16px;border-radius:8px;font-weight:800;font-size:14px;background:'+nc+';}' +
+    '.pct-num{font-size:34px;font-weight:900;color:#c97d08;font-family:monospace;}' +
+    '.desc{background:#f8f9fb;border:1px solid #eaecf0;border-radius:8px;padding:12px;font-size:13px;white-space:pre-wrap;line-height:1.6;}' +
+    '.divider{height:4px;background:linear-gradient(90deg,#c97d08,#1a2235);border-radius:2px;margin:24px 0;}' +
+    '.footer{text-align:center;font-size:11px;color:#9aaabb;margin-top:24px;padding-top:12px;border-top:1px solid #eaecf0;}' +
+    '.checklist-table{width:100%;border-collapse:collapse;font-size:12px;}' +
+    '.checklist-table td{padding:5px 8px;border-bottom:1px solid #f0f1f3;}' +
+    '@media print{body{background:#fff;padding:10px;}.header{-webkit-print-color-adjust:exact;print-color-adjust:exact;}}' +
+    '</style></head><body>' +
+
+    // HEADER
+    '<div class="header"><h1>🏗️ Maquinarias El Imán — Reporte de Servicio</h1><div class="sub">GUIA-TEC-001 v2.0 · Ingeniería Técnica y Control de Calidad · SOP-ITCC-001</div>' +
+    '<div class="tk-num">' + currentTicketNum + '</div>' +
+    '<div class="status-badge">● ' + ticketStatus + '</div></div>' +
+
+    // SECCIÓN TICKET
+    '<div class="section-title">🎫 Sistema de Tickets</div>' +
+    '<div class="card"><h2>Datos del Solicitante</h2><table>' +
+    '<tr><td>Técnico</td><td>' + tecnico + '</td></tr>' +
+    '<tr><td>País / Área</td><td>' + pais + '</td></tr>' +
+    '<tr><td>Fecha</td><td>' + fecha + '</td></tr>' +
+    '<tr><td>N° O/T</td><td>' + ot + '</td></tr></table></div>' +
+
+    '<div class="card"><h2>Datos del Equipo y Solicitud</h2><table>' +
+    '<tr><td>Cliente</td><td>' + cliente + '</td></tr>' +
+    '<tr><td>Tipo de Equipo</td><td>' + equipo + '</td></tr>' +
+    '<tr><td>Marca</td><td>' + marca + '</td></tr>' +
+    '<tr><td>Tipo de Solicitud</td><td>' + tipoSol + '</td></tr></table></div>' +
+
+    '<div class="card"><h2>Prioridad</h2><div class="prio">' + prio + '</div></div>' +
+    '<div class="card"><h2>Descripción del Requerimiento</h2><div class="desc">' + desc + '</div></div>' +
+    (acciones !== '—' ? '<div class="card"><h2>Acciones Previas Realizadas</h2><div class="desc">' + acciones + '</div></div>' : '') +
+
+    '<div class="divider"></div>' +
+
+    // SECCIÓN PLANILLA
+    '<div class="section-title">✅ Planilla de Servicio</div>' +
+    '<div class="card"><h2>Datos del Servicio</h2><table>' +
+    '<tr><td>Técnico</td><td>' + ptecnico + '</td></tr>' +
+    '<tr><td>Fecha</td><td>' + pfecha + '</td></tr>' +
+    '<tr><td>Orden de Trabajo</td><td>' + pot + '</td></tr>' +
+    '<tr><td>Cliente</td><td>' + pcliente + '</td></tr>' +
+    '<tr><td>Equipo</td><td>' + pequipFinal + '</td></tr>' +
+    '<tr><td>Marca</td><td>' + pmarca + '</td></tr>' +
+    '<tr><td>Tipo de Servicio</td><td>' + ptipoServ + '</td></tr></table></div>' +
+
+    '<div class="card"><h2>Cumplimiento del Protocolo</h2>' +
+    '<p><span class="pct-num">' + pct + '%</span> &nbsp;<span style="font-size:13px;color:#6b7585;">(' + done.length + '/' + all.length + ' ítems completados)</span></p>' +
+    '<div style="height:10px;background:#eaecf0;border-radius:5px;margin-top:10px;overflow:hidden;">' +
+    '<div style="height:100%;width:' + pct + '%;background:linear-gradient(90deg,#c73a14,#c97d08);border-radius:5px;"></div></div></div>' +
+
+    '<div class="card"><h2>Nivel de Atención</h2><div class="nivel">' + nivel + '</div></div>' +
+    (defects.length>0 ? '<div class="card"><h2>⚠️ Deficiencias Detectadas</h2><ul style="font-size:13px;padding-left:18px;">' + defects.join('') + '</ul></div>' : '') +
+    '<div class="card"><h2>Observaciones del Técnico</h2><div class="desc">' + pobs + '</div></div>' +
+
+    '<div class="card"><h2>Detalle del Protocolo Ejecutado</h2>' +
+    '<table class="checklist-table">' + checklistHTML + '</table></div>' +
+
+    '<div class="footer">GUIA-TEC-001 v2.0 · ' + currentTicketNum + ' · Generado: ' + new Date().toLocaleString('es') + ' · Estado: ' + ticketStatus + '</div>' +
+    '</body></html>';
+  }
+
+  /* ══════════════════════════════════════
+     DESCARGAR TODO
+  ══════════════════════════════════════ */
+  function downloadCompleto() {
+    var html = buildFullReportHTML('ABIERTO');
+    var blob = new Blob([html], { type: 'text/html' });
+    var url = URL.createObjectURL(blob);
+    var a = document.createElement('a');
+    var fecha = document.getElementById('tk-fecha').value || new Date().toISOString().slice(0,10);
+    a.href = url; a.download = currentTicketNum + '_Reporte_' + fecha + '.html';
+    document.body.appendChild(a); a.click();
+    document.body.removeChild(a); URL.revokeObjectURL(url);
+    var stat = document.getElementById('tk-status') || document.getElementById('planilla-status');
+    if (stat) { stat.className = 'share-status ok'; stat.textContent = '✅ Reporte completo descargado (Ticket + Planilla). Ábrelo en el navegador.'; stat.style.display = 'block'; }
+  }
+
+  /* ══════════════════════════════════════
+     COMPARTIR TODO (genera archivo + share)
+  ══════════════════════════════════════ */
+  async function shareCompleto() {
+    var html = buildFullReportHTML('ABIERTO');
+    var blob = new Blob([html], { type: 'text/html' });
+    var fecha = document.getElementById('tk-fecha').value || new Date().toISOString().slice(0,10);
+    var fileName = currentTicketNum + '_Reporte_' + fecha + '.html';
+    var stat = document.getElementById('tk-status') || document.getElementById('planilla-status');
+
+    // Bloquear formulario inmediatamente
+    lockAllForms();
+
+    if (navigator.share && navigator.canShare && navigator.canShare({ files: [new File([blob], fileName, {type:'text/html'})] })) {
+      try {
+        await navigator.share({
+          title: currentTicketNum + ' — Maquinarias El Imán',
+          text: 'Reporte de Servicio: ' + currentTicketNum,
+          files: [new File([blob], fileName, {type:'text/html'})]
+        });
+        if (stat) { stat.className = 'share-status ok'; stat.textContent = '✅ Reporte compartido exitosamente. Formulario bloqueado.'; stat.style.display = 'block'; }
+        return;
+      } catch(e) {
+        if (e.name === 'AbortError') {
+          if (stat) { stat.className = 'share-status err'; stat.textContent = '⚠️ Compartir cancelado. Formulario bloqueado de todas formas.'; stat.style.display = 'block'; }
+          return;
+        }
+      }
+    }
+
+    // Fallback: descargar si no hay share API de archivos
+    var url = URL.createObjectURL(blob);
+    var a = document.createElement('a');
+    a.href = url; a.download = fileName;
+    document.body.appendChild(a); a.click();
+    document.body.removeChild(a); URL.revokeObjectURL(url);
+    if (stat) { stat.className = 'share-status ok'; stat.textContent = '✅ Reporte descargado (Ticket + Planilla). Compártelo por el medio que prefieras. Formulario bloqueado.'; stat.style.display = 'block'; }
+  }
+
+  // Mantener funciones antiguas como alias por compatibilidad
+  function shareTicket() { shareCompleto(); }
+  function sharePlanilla() { shareCompleto(); }
+  function downloadTicket() { downloadCompleto(); }
+  function downloadPlanilla() { downloadCompleto(); }
+
+  /* ══════════════════════════════════════
+     MODAL DE INGENIERO SUPERIOR
+  ══════════════════════════════════════ */
+  // Credenciales del ingeniero
+  var ENG_USER = 'ingenieriamaquinariaseliman';
+  var ENG_PASS = 'iman';
+  var engineerLoggedIn = false;
+
+  function openEngineerModal() {
+    document.getElementById('eng-modal').style.display = 'flex';
+    document.getElementById('eng-user-input').value = '';
+    document.getElementById('eng-pass-input').value = '';
+    document.getElementById('eng-error').style.display = 'none';
+    setTimeout(function(){ document.getElementById('eng-user-input').focus(); }, 100);
+  }
+  function closeEngineerModal() {
+    document.getElementById('eng-modal').style.display = 'none';
+  }
+  function loginEngineer() {
+    var u = document.getElementById('eng-user-input').value.trim();
+    var p = document.getElementById('eng-pass-input').value;
+    if (u === ENG_USER && p === ENG_PASS) {
+      engineerLoggedIn = true;
+      closeEngineerModal();
+      document.getElementById('eng-panel').style.display = 'block';
+      document.getElementById('eng-login-btn').style.display = 'none';
+    } else {
+      document.getElementById('eng-error').style.display = 'block';
+    }
+  }
+  function setTicketStatus(status) {
+    var strip = document.getElementById('tk-status-text');
+    var dot = document.getElementById('tk-status-dot');
+    var statusColors = { 'ABIERTO':'#6ed4a0', 'EN PROCESO':'#f0c060', 'CERRADO':'#9aaabb' };
+    var statusEmojis = { 'ABIERTO':'🟢', 'EN PROCESO':'🟡', 'CERRADO':'⚫' };
+    if (strip) strip.textContent = (statusEmojis[status]||'') + ' ' + status;
+    if (dot) { dot.style.background = statusColors[status] || '#6ed4a0'; }
+    // Update all status displays
+    document.querySelectorAll('.tk-current-status').forEach(function(el){ el.textContent = status; });
+    // Save status
+    try {
+      var tk = JSON.parse(localStorage.getItem(TK_KEY)) || {};
+      tk.status = status; tk.ticketNum = currentTicketNum;
+      localStorage.setItem(TK_KEY, JSON.stringify(tk));
+    } catch(e){}
+    // Visual feedback
+    var feedback = document.getElementById('eng-feedback');
+    if (feedback) { feedback.textContent = '✅ Estado actualizado a: ' + status; feedback.style.display = 'block'; }
+  }
+
+  /* ── TABS ── */
+  function switchTab(name, btn) {
+    document.querySelectorAll('.tab-panel').forEach(function(p){ p.classList.remove('active'); });
+    document.querySelectorAll('.tab-btn').forEach(function(b){ b.classList.remove('active'); });
+    document.getElementById('tab-'+name).classList.add('active');
+    if (btn) btn.classList.add('active');
+    var pw = document.getElementById('progress-wrap');
+    pw.style.display = name === 'planilla' ? 'block' : 'none';
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  /* ── PRIORITY SELECTION ── */
+  var selectedPriority = null;
+  function selectPriority(btn) {
+    document.querySelectorAll('.prio-btn').forEach(function(b){ b.classList.remove('selected'); });
+    btn.classList.add('selected');
+    selectedPriority = btn.getAttribute('data-p');
+    autoSaveTicket();
+  }
+
+  /* ── ATTENTION LEVEL ── */
+  var selectedAttnLevel = null;
+  function selectAttn(card, level) {
+    document.querySelectorAll('.attn-card').forEach(function(c){ c.classList.remove('selected'); });
+    card.classList.add('selected');
+    selectedAttnLevel = level;
+    autoSavePlanilla();
+  }
+
+  /* ── EQUIP SELECTION ── */
+  function selectEquip(btn, isOtros) {
+    document.querySelectorAll('.equip-btn').forEach(function(b){ b.classList.remove('selected'); });
+    btn.classList.add('selected');
+    var wrap = document.getElementById('otros-equip-wrap');
+    if (wrap) wrap.style.display = isOtros ? 'block' : 'none';
+    autoSavePlanilla();
+  }
+
+  /* ── STEP CARDS TOGGLE ── */
+  function toggleCard(id) {
+    var body = document.getElementById('body-'+id);
+    if (body) body.classList.toggle('open');
+  }
+
+  /* ── CHECKLIST ── */
+  function toggleCheck(el, stepId) {
+    el.classList.toggle('checked');
+    updateStepProgress(stepId);
+    updateOverallProgress();
+    autoSavePlanilla();
+  }
+  function updateStepProgress(stepId) {
+    var body = document.getElementById('body-'+stepId);
+    var card = document.getElementById('card-'+stepId);
+    if (!card || !body) return;
+    var items = body.querySelectorAll('.check-item');
+    var checked = body.querySelectorAll('.check-item.checked');
+    var s = document.getElementById('status-'+stepId);
+    if (items.length > 0 && checked.length === items.length) {
+      card.classList.add('completed'); card.classList.remove('active');
+      if (s) s.textContent = '✓';
+    } else {
+      card.classList.remove('completed');
+      card.classList.toggle('active', checked.length > 0);
+      if (s) s.textContent = '';
+    }
+  }
+  function updateOverallProgress() {
+    var all = document.querySelectorAll('#tab-planilla .check-item');
+    var done = document.querySelectorAll('#tab-planilla .check-item.checked');
+    var pct = all.length ? Math.round((done.length/all.length)*100) : 0;
+    document.getElementById('prog-fill').style.width = pct+'%';
+    document.getElementById('prog-pct').textContent = pct+'%';
+    if (pct === 100) {
+      setTimeout(function(){
+        var c = document.getElementById('completion');
+        c.classList.add('show');
+        c.scrollIntoView({ behavior: 'smooth' });
+      }, 400);
+    }
+  }
+
+  /* ── OBS CHAR COUNT ── */
+  var obsTA = document.getElementById('obs-textarea');
+  if (obsTA) obsTA.addEventListener('input', function(){
+    document.getElementById('obs-chars').textContent = obsTA.value.length;
+    autoSavePlanilla();
+  });
+
+  /* ════════════════════════════════════════
+     TICKET BUILD + SHARE
+  ════════════════════════════════════════ */
+  function buildTicketMessage() {
+    var tecnico = document.getElementById('tk-tecnico').value || '—';
+    var fecha = document.getElementById('tk-fecha').value || '—';
+    var pais = document.getElementById('tk-pais').value || '—';
+    var ot = document.getElementById('tk-ot').value || '—';
+    var cliente = document.getElementById('tk-cliente').value || '—';
+    var equipo = document.getElementById('tk-equipo').value || '—';
+    var marca = document.getElementById('tk-marca').value || '—';
+    var tipoSol = document.getElementById('tk-tipo-sol').value || '—';
+    var desc = document.getElementById('tk-descripcion').value.trim() || '(Sin descripción)';
+    var acciones = document.getElementById('tk-acciones').value.trim() || '(Ninguna)';
+    var prioLabels = { verde: '🟢 Verde — Normal', amarillo: '🟡 Amarillo — Seguimiento', rojo: '🔴 Rojo — Urgente', morado: '🟣 Morado — Investigación' };
+    var prio = selectedPriority ? prioLabels[selectedPriority] : '⚠️ No seleccionada';
+
+    var msg = '🏗️ *MAQUINARIAS EL IMÁN — TICKET ITCC*\n';
+    msg += '━━━━━━━━━━━━━━━━━━━━━━━━\n';
+    msg += '🎫 *N° Ticket: ' + currentTicketNum + '*\n';
+    msg += '📅 Fecha: ' + fecha + '\n';
+    msg += '🔴 Estado: ABIERTO\n\n';
+    msg += '👤 *SOLICITANTE*\n';
+    msg += '• Técnico: ' + tecnico + '\n';
+    msg += '• País/Área: ' + pais + '\n';
+    msg += '• O/T: ' + ot + '\n\n';
+    msg += '🔧 *EQUIPO Y SOLICITUD*\n';
+    msg += '• Cliente: ' + cliente + '\n';
+    msg += '• Equipo: ' + equipo + '\n';
+    msg += '• Marca: ' + marca + '\n';
+    msg += '• Tipo de solicitud: ' + tipoSol + '\n\n';
+    msg += '🎨 *PRIORIDAD: ' + prio + '*\n\n';
+    msg += '📝 *DESCRIPCIÓN:*\n' + desc + '\n\n';
+    msg += '🔨 *ACCIONES PREVIAS:*\n' + acciones + '\n';
+    msg += '━━━━━━━━━━━━━━━━━━━━━━━━\n';
+    msg += '📌 SOP-ITCC-001 · Ingeniería Técnica y CC · Maquinarias El Imán';
+    return msg;
+  }
+
+  function copyTicket() {
+    var msg = buildTicketMessage();
+    var prev = document.getElementById('tk-preview');
+    var stat = document.getElementById('tk-status');
+    prev.textContent = msg; prev.style.display = 'block';
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(msg).then(function(){
+        stat.className = 'share-status ok'; stat.textContent = '✅ Texto copiado. Pégalo en Telegram, correo o WhatsApp.'; stat.style.display = 'block';
+      }).catch(function(){ fallbackCopy(msg, stat, ''); });
+    } else { fallbackCopy(msg, stat, ''); }
+  }
+
+  async function shareTicket() {
+    var msg = buildTicketMessage();
+    var stat = document.getElementById('tk-status');
+    if (navigator.share) {
+      try {
+        await navigator.share({ title: 'Ticket ' + currentTicketNum + ' — Maquinarias El Imán', text: msg });
+        stat.className = 'share-status ok'; stat.textContent = '✅ Ticket compartido.'; stat.style.display = 'block';
+      } catch(e) { if (e.name !== 'AbortError') copyTicket(); }
+    } else { copyTicket(); }
+  }
+
+  function downloadTicket() {
+    var stat = document.getElementById('tk-status');
+    var tecnico = document.getElementById('tk-tecnico').value || '—';
+    var fecha = document.getElementById('tk-fecha').value || '—';
+    var pais = document.getElementById('tk-pais').value || '—';
+    var ot = document.getElementById('tk-ot').value || '—';
+    var cliente = document.getElementById('tk-cliente').value || '—';
+    var equipo = document.getElementById('tk-equipo').value || '—';
+    var marca = document.getElementById('tk-marca').value || '—';
+    var tipoSol = document.getElementById('tk-tipo-sol').value || '—';
+    var desc = document.getElementById('tk-descripcion').value || '—';
+    var acciones = document.getElementById('tk-acciones').value || '—';
+    var prioLabels = { verde: '🟢 Verde — Normal', amarillo: '🟡 Amarillo — Seguimiento', rojo: '🔴 Rojo — Urgente', morado: '🟣 Morado — Investigación' };
+    var prio = selectedPriority ? prioLabels[selectedPriority] : '⚠️ No seleccionada';
+    var prioColor = { verde:'#edf8f2', amarillo:'#fff8ec', rojo:'#fdf1ee', morado:'#f3eefb' };
+    var pc = selectedPriority ? prioColor[selectedPriority] : '#f8f9fb';
+
+    var html = '<!DOCTYPE html><html lang="es"><head><meta charset="UTF-8">' +
+      '<title>Ticket ' + currentTicketNum + '</title>' +
+      '<style>body{font-family:Arial,sans-serif;max-width:680px;margin:0 auto;padding:28px;color:#1a1f2b;background:#f5f6f8;}' +
+      '.header{background:#1a2235;color:#fff;padding:20px 24px;border-radius:12px;margin-bottom:20px;border-bottom:4px solid #c97d08;}' +
+      '.header h1{font-size:20px;margin:0 0 4px;text-transform:uppercase;letter-spacing:1px;}' +
+      '.header .sub{font-size:12px;color:#8da0bb;}' +
+      '.tk-num{font-size:28px;font-weight:900;color:#c97d08;font-family:monospace;margin-top:10px;}' +
+      '.card{background:#fff;border:1.5px solid #d8dce4;border-radius:10px;padding:16px 18px;margin-bottom:14px;}' +
+      '.card h2{font-size:12px;text-transform:uppercase;letter-spacing:1.5px;color:#6b7585;border-bottom:1px solid #eaecf0;padding-bottom:6px;margin-bottom:12px;}' +
+      'table{width:100%;border-collapse:collapse;}td{padding:7px 10px;border-bottom:1px solid #eaecf0;font-size:13px;}' +
+      'td:first-child{font-weight:700;color:#3d4655;width:38%;}' +
+      '.prio{padding:10px 16px;border-radius:8px;font-weight:800;font-size:14px;background:'+pc+';}' +
+      '.desc{background:#f8f9fb;border:1px solid #eaecf0;border-radius:8px;padding:12px;font-size:13px;white-space:pre-wrap;line-height:1.6;}' +
+      '.footer{text-align:center;font-size:11px;color:#9aaabb;margin-top:20px;padding-top:12px;border-top:1px solid #eaecf0;}' +
+      '@media print{body{background:#fff;padding:10px;}}' +
+      '</style></head><body>' +
+      '<div class="header"><h1>🏗️ Maquinarias El Imán — Ticket de Soporte</h1><div class="sub">Ingeniería Técnica y Control de Calidad · SOP-ITCC-001</div>' +
+      '<div class="tk-num">' + currentTicketNum + '</div></div>' +
+      '<div class="card"><h2>Datos del Solicitante</h2><table>' +
+      '<tr><td>Técnico</td><td>' + tecnico + '</td></tr>' +
+      '<tr><td>País / Área</td><td>' + pais + '</td></tr>' +
+      '<tr><td>Fecha</td><td>' + fecha + '</td></tr>' +
+      '<tr><td>N° O/T</td><td>' + ot + '</td></tr></table></div>' +
+      '<div class="card"><h2>Datos del Equipo y Solicitud</h2><table>' +
+      '<tr><td>Cliente</td><td>' + cliente + '</td></tr>' +
+      '<tr><td>Tipo de Equipo</td><td>' + equipo + '</td></tr>' +
+      '<tr><td>Marca</td><td>' + marca + '</td></tr>' +
+      '<tr><td>Tipo de Solicitud</td><td>' + tipoSol + '</td></tr></table></div>' +
+      '<div class="card"><h2>Prioridad</h2><div class="prio">' + prio + '</div></div>' +
+      '<div class="card"><h2>Descripción del Requerimiento</h2><div class="desc">' + desc + '</div></div>' +
+      '<div class="card"><h2>Acciones Previas Realizadas</h2><div class="desc">' + acciones + '</div></div>' +
+      '<div class="footer">GUIA-TEC-001 v2.0 · Generado: ' + new Date().toLocaleString('es') + ' · Estado: ABIERTO</div>' +
+      '</body></html>';
+
+    var blob = new Blob([html], { type: 'text/html' });
+    var url = URL.createObjectURL(blob);
+    var a = document.createElement('a');
+    a.href = url; a.download = currentTicketNum + '_' + fecha + '.html';
+    document.body.appendChild(a); a.click();
+    document.body.removeChild(a); URL.revokeObjectURL(url);
+    stat.className = 'share-status ok';
+    stat.textContent = '✅ Archivo descargado. Ábrelo en el navegador e imprime como PDF para enviarlo.';
+    stat.style.display = 'block';
+  }
+
+  function resetTicket() {
+    ['tk-tecnico','tk-ot','tk-cliente','tk-descripcion','tk-acciones'].forEach(function(id){
+      var el = document.getElementById(id); if (el) el.value = '';
+    });
+    ['tk-pais','tk-equipo','tk-marca','tk-tipo-sol'].forEach(function(id){
+      var el = document.getElementById(id); if (el) el.selectedIndex = 0;
+    });
+    document.querySelectorAll('.prio-btn').forEach(function(b){ b.classList.remove('selected'); });
+    selectedPriority = null;
+    document.getElementById('tk-fecha').value = todayStr;
+    currentTicketNum = getNextTicketNumber();
+    document.getElementById('tk-number').textContent = currentTicketNum;
+    updateTimestamp();
+    document.getElementById('tk-preview').style.display = 'none';
+    document.getElementById('tk-status').style.display = 'none';
+    try { localStorage.removeItem('imanTicketSave'); } catch(e){}
+    document.getElementById('save-indicator-tk').textContent = '💾 Datos limpiados — listo para nuevo ticket';
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  /* ════════════════════════════════════════
+     PLANILLA BUILD + SHARE
+  ════════════════════════════════════════ */
+  function buildPlanillaMessage() {
+    var tecnico = document.getElementById('f-tecnico').value || '—';
+    var fecha = document.getElementById('f-fecha').value || '—';
+    var ot = document.getElementById('f-ot').value || '—';
+    var cliente = document.getElementById('f-cliente').value || '—';
+    var equipBtn = document.querySelector('.equip-btn.selected');
+    var equip = equipBtn ? equipBtn.textContent.trim() : '—';
+    var equipOtros = document.getElementById('otros-equip-input').value || '';
+    var equipFinal = equip.indexOf('Otros') >= 0 ? 'Otros: ' + equipOtros : equip;
+    var all = document.querySelectorAll('#tab-planilla .check-item');
+    var done = document.querySelectorAll('#tab-planilla .check-item.checked');
+    var pct = all.length ? Math.round((done.length/all.length)*100) : 0;
+    var defects = [];
+    document.querySelectorAll('.defect-item.checked .check-label').forEach(function(el){
+      defects.push('• ' + el.textContent.trim());
+    });
+    var nivelLabels = { 1:'🟢 Nivel 1 — Normal', 2:'🟡 Nivel 2 — Requiere Seguimiento', 3:'🔴 Nivel 3 — Atención Urgente' };
+    var nivel = selectedAttnLevel ? nivelLabels[selectedAttnLevel] : '⚠️ No seleccionado';
+    var obs = document.getElementById('obs-textarea').value.trim() || '(Sin observaciones)';
+
+    var msg = '🏗️ *MAQUINARIAS EL IMÁN — GUIA-TEC-001 v2.0*\n';
+    msg += '━━━━━━━━━━━━━━━━━━━━━━━━\n';
+    msg += '📋 *REPORTE DE SERVICIO*\n\n';
+    msg += '👷 Técnico: ' + tecnico + '\n';
+    msg += '📅 Fecha: ' + fecha + '\n';
+    msg += '🔖 O/T: ' + ot + '\n';
+    msg += '🏢 Cliente: ' + cliente + '\n';
+    msg += '🔧 Equipo: ' + equipFinal + '\n\n';
+    msg += '📊 *Cumplimiento: ' + pct + '%* (' + done.length + '/' + all.length + ' ítems)\n';
+    msg += '🚨 *Nivel de Atención: ' + nivel + '*\n';
+    if (defects.length > 0) { msg += '\n⚠️ *Deficiencias detectadas:*\n' + defects.join('\n') + '\n'; }
+    msg += '\n📝 *Observaciones:*\n' + obs + '\n';
+    msg += '━━━━━━━━━━━━━━━━━━━━━━━━\n';
+    msg += '✅ GUIA-TEC-001 v2.0 · Maquinarias El Imán';
+    return msg;
+  }
+
+  function copyPlanillaMsg() {
+    var msg = buildPlanillaMessage();
+    var prev = document.getElementById('planilla-preview');
+    var stat = document.getElementById('planilla-status');
+    prev.textContent = msg; prev.style.display = 'block';
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(msg).then(function(){
+        stat.className = 'share-status ok'; stat.textContent = '✅ Texto copiado. Pégalo en Telegram, correo o WhatsApp.'; stat.style.display = 'block';
+      }).catch(function(){ fallbackCopy(msg, stat, 'planilla'); });
+    } else { fallbackCopy(msg, stat, 'planilla'); }
+  }
+
+  async function sharePlanilla() {
+    var msg = buildPlanillaMessage();
+    var stat = document.getElementById('planilla-status');
+    if (navigator.share) {
+      try {
+        await navigator.share({ title: 'Reporte de Servicio — Maquinarias El Imán', text: msg });
+        stat.className = 'share-status ok'; stat.textContent = '✅ Reporte compartido.'; stat.style.display = 'block';
+      } catch(e) { if (e.name !== 'AbortError') copyPlanillaMsg(); }
+    } else { copyPlanillaMsg(); }
+  }
+
+  function downloadPlanilla() {
+    var stat = document.getElementById('planilla-status');
+    var tecnico = document.getElementById('f-tecnico').value || '—';
+    var fecha = document.getElementById('f-fecha').value || '—';
+    var ot = document.getElementById('f-ot').value || '—';
+    var cliente = document.getElementById('f-cliente').value || '—';
+    var equipBtn = document.querySelector('.equip-btn.selected');
+    var equip = equipBtn ? equipBtn.textContent.trim() : '—';
+    var marca = document.getElementById('f-marca').value || '—';
+    var tipoServ = document.getElementById('f-tipo-serv').value || '—';
+    var obs = document.getElementById('obs-textarea').value || '—';
+    var all = document.querySelectorAll('#tab-planilla .check-item');
+    var done = document.querySelectorAll('#tab-planilla .check-item.checked');
+    var pct = all.length ? Math.round((done.length/all.length)*100) : 0;
+    var defects = [];
+    document.querySelectorAll('.defect-item.checked .check-label').forEach(function(el){
+      defects.push('<li>'+el.textContent.trim()+'</li>');
+    });
+    var nivelLabels = { 1:'🟢 Nivel 1 — Normal', 2:'🟡 Nivel 2 — Requiere Seguimiento', 3:'🔴 Nivel 3 — Atención Urgente' };
+    var nivel = selectedAttnLevel ? nivelLabels[selectedAttnLevel] : '⚠️ No seleccionado';
+    var nc = selectedAttnLevel===1?'#edf8f2':selectedAttnLevel===2?'#fff8ec':'#fdf1ee';
+
+    var html = '<!DOCTYPE html><html lang="es"><head><meta charset="UTF-8">' +
+      '<title>Reporte '+ot+'</title>' +
+      '<style>body{font-family:Arial,sans-serif;max-width:680px;margin:0 auto;padding:28px;color:#1a1f2b;background:#f5f6f8;}' +
+      '.header{background:#1a2235;color:#fff;padding:20px 24px;border-radius:12px;margin-bottom:20px;border-bottom:4px solid #c97d08;}' +
+      '.header h1{font-size:20px;margin:0 0 4px;text-transform:uppercase;}' +
+      '.header .sub{font-size:12px;color:#8da0bb;}' +
+      '.card{background:#fff;border:1.5px solid #d8dce4;border-radius:10px;padding:16px 18px;margin-bottom:14px;}' +
+      '.card h2{font-size:12px;text-transform:uppercase;letter-spacing:1.5px;color:#6b7585;border-bottom:1px solid #eaecf0;padding-bottom:6px;margin-bottom:12px;}' +
+      'table{width:100%;border-collapse:collapse;}td{padding:7px 10px;border-bottom:1px solid #eaecf0;font-size:13px;}' +
+      'td:first-child{font-weight:700;color:#3d4655;width:38%;}' +
+      '.pct{font-size:32px;font-weight:900;color:#c97d08;}.nivel{padding:10px 16px;border-radius:8px;font-weight:800;font-size:14px;background:'+nc+';}' +
+      '.desc{background:#f8f9fb;border:1px solid #eaecf0;border-radius:8px;padding:12px;font-size:13px;white-space:pre-wrap;line-height:1.6;}' +
+      '.footer{text-align:center;font-size:11px;color:#9aaabb;margin-top:20px;padding-top:12px;border-top:1px solid #eaecf0;}' +
+      '@media print{body{background:#fff;}}' +
+      '</style></head><body>' +
+      '<div class="header"><h1>🏗️ Maquinarias El Imán — Reporte de Servicio</h1><div class="sub">GUIA-TEC-001 v2.0 · Ingeniería Técnica y Control de Calidad</div></div>' +
+      '<div class="card"><h2>Datos del Servicio</h2><table>' +
+      '<tr><td>Técnico</td><td>'+tecnico+'</td></tr>' +
+      '<tr><td>Fecha</td><td>'+fecha+'</td></tr>' +
+      '<tr><td>Orden de Trabajo</td><td>'+ot+'</td></tr>' +
+      '<tr><td>Cliente</td><td>'+cliente+'</td></tr>' +
+      '<tr><td>Equipo</td><td>'+equip+'</td></tr>' +
+      '<tr><td>Marca</td><td>'+marca+'</td></tr>' +
+      '<tr><td>Tipo de Servicio</td><td>'+tipoServ+'</td></tr></table></div>' +
+      '<div class="card"><h2>Cumplimiento del Protocolo</h2><p><span class="pct">'+pct+'%</span> &nbsp;('+done.length+'/'+all.length+' ítems completados)</p></div>' +
+      '<div class="card"><h2>Nivel de Atención</h2><div class="nivel">'+nivel+'</div></div>' +
+      (defects.length>0?'<div class="card"><h2>⚠️ Deficiencias Detectadas</h2><ul style="font-size:13px;">'+defects.join('')+'</ul></div>':'') +
+      '<div class="card"><h2>Observaciones del Técnico</h2><div class="desc">'+obs+'</div></div>' +
+      '<div class="footer">GUIA-TEC-001 v2.0 · Generado: '+new Date().toLocaleString('es')+'</div>' +
+      '</body></html>';
+
+    var blob = new Blob([html], { type: 'text/html' });
+    var url = URL.createObjectURL(blob);
+    var a = document.createElement('a');
+    a.href = url; a.download = 'Reporte_'+(ot!=='—'?ot:'SinOT')+'_'+fecha+'.html';
+    document.body.appendChild(a); a.click();
+    document.body.removeChild(a); URL.revokeObjectURL(url);
+    stat.className = 'share-status ok';
+    stat.textContent = '✅ Archivo descargado. Ábrelo en el navegador e imprime como PDF.';
+    stat.style.display = 'block';
+  }
+
+  function resetPlanilla() {
+    document.querySelectorAll('.check-item').forEach(function(el){ el.classList.remove('checked'); });
+    document.querySelectorAll('.step-card').forEach(function(el){ el.classList.remove('completed','active'); });
+    document.querySelectorAll('.step-status').forEach(function(el){ el.textContent = ''; });
+    document.getElementById('prog-fill').style.width = '0%';
+    document.getElementById('prog-pct').textContent = '0%';
+    document.getElementById('completion').classList.remove('show');
+    ['f-tecnico','f-ot','f-cliente'].forEach(function(id){ document.getElementById(id).value = ''; });
+    ['f-marca','f-tipo-serv'].forEach(function(id){ document.getElementById(id).selectedIndex = 0; });
+    document.querySelectorAll('.equip-btn').forEach(function(b){ b.classList.remove('selected'); });
+    document.querySelectorAll('.attn-card').forEach(function(c){ c.classList.remove('selected'); });
+    selectedAttnLevel = null;
+    var obsTA2 = document.getElementById('obs-textarea');
+    if (obsTA2) { obsTA2.value = ''; document.getElementById('obs-chars').textContent = '0'; }
+    document.getElementById('otros-equip-wrap').style.display = 'none';
+    document.getElementById('otros-equip-input').value = '';
+    document.getElementById('planilla-preview').style.display = 'none';
+    document.getElementById('planilla-status').style.display = 'none';
+    document.getElementById('f-fecha').value = todayStr;
+    try { localStorage.removeItem('imanPlanillaSave'); } catch(e){}
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  /* ── FALLBACK COPY ── */
+  function fallbackCopy(msg, stat, type) {
+    var ta = document.createElement('textarea');
+    ta.value = msg; ta.style.position = 'fixed'; ta.style.left = '-9999px';
+    document.body.appendChild(ta); ta.focus(); ta.select();
+    try { document.execCommand('copy'); stat.className = 'share-status ok'; stat.textContent = '✅ Copiado. Pégalo donde necesites.'; }
+    catch(e) { stat.className = 'share-status err'; stat.textContent = '⚠️ No se pudo copiar automáticamente.'; }
+    stat.style.display = 'block'; document.body.removeChild(ta);
+  }
+
+  /* ════════════════════════════════════════
+     AUTO-SAVE (localStorage)
+  ════════════════════════════════════════ */
+  var TK_KEY = 'imanTicketSave';
+  var PL_KEY = 'imanPlanillaSave';
+
+  function autoSaveTicket() {
+    try {
+      var data = {
+        tecnico: document.getElementById('tk-tecnico').value,
+        fecha: document.getElementById('tk-fecha').value,
+        pais: document.getElementById('tk-pais').value,
+        ot: document.getElementById('tk-ot').value,
+        cliente: document.getElementById('tk-cliente').value,
+        equipo: document.getElementById('tk-equipo').value,
+        marca: document.getElementById('tk-marca').value,
+        tipoSol: document.getElementById('tk-tipo-sol').value,
+        descripcion: document.getElementById('tk-descripcion').value,
+        acciones: document.getElementById('tk-acciones').value,
+        priority: selectedPriority,
+        ticketNum: currentTicketNum,
+        status: (document.getElementById('tk-status-text') ? document.getElementById('tk-status-text').textContent.replace(/[^\w\s]/g,'').trim() : 'ABIERTO')
+      };
+      localStorage.setItem(TK_KEY, JSON.stringify(data));
+      var ind = document.getElementById('save-indicator-tk');
+      if (ind) ind.textContent = '💾 Guardado: ' + new Date().toLocaleTimeString('es');
+    } catch(e){}
+  }
+
+  function autoSavePlanilla() {
+    try {
+      var checks = [];
+      document.querySelectorAll('#tab-planilla .check-item').forEach(function(el){ checks.push(el.classList.contains('checked')); });
+      var equipBtn = document.querySelector('.equip-btn.selected');
+      var data = {
+        tecnico: document.getElementById('f-tecnico').value,
+        fecha: document.getElementById('f-fecha').value,
+        ot: document.getElementById('f-ot').value,
+        cliente: document.getElementById('f-cliente').value,
+        marca: document.getElementById('f-marca').value,
+        tipoServ: document.getElementById('f-tipo-serv').value,
+        obs: document.getElementById('obs-textarea').value,
+        attnLevel: selectedAttnLevel,
+        equip: equipBtn ? equipBtn.textContent.trim() : null,
+        equipOtros: document.getElementById('otros-equip-input').value,
+        checks: checks
+      };
+      localStorage.setItem(PL_KEY, JSON.stringify(data));
+      var ind = document.getElementById('save-indicator-pl');
+      if (ind) ind.textContent = '💾 Guardado: ' + new Date().toLocaleTimeString('es');
+    } catch(e){}
+  }
+
+  /* ── INIT TICKET NUMBER ── */
+  initTicketNumber();
+  updateTimestamp();
+
+  /* ── RESTORE TICKET STATUS ── */
+  try {
+    var savedTk = JSON.parse(localStorage.getItem(TK_KEY));
+    if (savedTk && savedTk.status && savedTk.status !== 'ABIERTO') {
+      var st = document.getElementById('tk-status-text');
+      if (st) st.textContent = savedTk.status;
+      document.querySelectorAll('.tk-current-status').forEach(function(el){ el.textContent = savedTk.status; });
+    }
+  } catch(e) {}
+
+  window.addEventListener('load', function(){
+    /* Restore ticket */
+    try {
+      var tk = JSON.parse(localStorage.getItem(TK_KEY));
+      if (tk) {
+        // ticketNum is already set by initTicketNumber() above
+        ['tecnico','fecha','ot','cliente','descripcion','acciones'].forEach(function(f){
+          var el = document.getElementById('tk-'+f); if (el && tk[f]) el.value = tk[f];
+        });
+        ['pais','equipo','marca','tipoSol'].forEach(function(f){
+          var el = document.getElementById('tk-'+f); if (el && tk[f]) el.value = tk[f];
+        });
+        if (tk.priority) {
+          var btn = document.querySelector('.prio-btn[data-p="'+tk.priority+'"]');
+          if (btn) { btn.classList.add('selected'); selectedPriority = tk.priority; }
+        }
+        document.getElementById('save-indicator-tk').textContent = '💾 Datos restaurados automáticamente';
+      }
+    } catch(e){}
+
+    /* Restore planilla */
+    try {
+      var pl = JSON.parse(localStorage.getItem(PL_KEY));
+      if (pl) {
+        ['f-tecnico','f-ot','f-cliente'].forEach(function(id){ var el=document.getElementById(id); if(el&&pl[id.replace('f-','')]) el.value=pl[id.replace('f-','')]; });
+        if (document.getElementById('f-tecnico') && pl.tecnico) document.getElementById('f-tecnico').value = pl.tecnico;
+        if (pl.ot) document.getElementById('f-ot').value = pl.ot;
+        if (pl.cliente) document.getElementById('f-cliente').value = pl.cliente;
+        if (pl.marca) document.getElementById('f-marca').value = pl.marca;
+        if (pl.tipoServ) document.getElementById('f-tipo-serv').value = pl.tipoServ;
+        if (pl.obs) { document.getElementById('obs-textarea').value = pl.obs; document.getElementById('obs-chars').textContent = pl.obs.length; }
+        if (pl.attnLevel) {
+          selectedAttnLevel = pl.attnLevel;
+          var ac = document.querySelector('.attn-card.nivel-'+pl.attnLevel); if (ac) ac.classList.add('selected');
+        }
+        if (pl.equip) {
+          document.querySelectorAll('.equip-btn').forEach(function(b){
+            if (b.textContent.trim()===pl.equip) {
+              b.classList.add('selected');
+              if (pl.equip.indexOf('Otros')>=0) { document.getElementById('otros-equip-wrap').style.display='block'; }
+            }
+          });
+          if (pl.equipOtros) document.getElementById('otros-equip-input').value = pl.equipOtros;
+        }
+        if (pl.checks) {
+          var items = document.querySelectorAll('#tab-planilla .check-item');
+          pl.checks.forEach(function(checked, i){
+            if (items[i] && checked) {
+              items[i].classList.add('checked');
+              var bodyEl = items[i].closest('[id^="body-"]');
+              if (bodyEl) updateStepProgress(bodyEl.id.replace('body-',''));
+            }
+          });
+          updateOverallProgress();
+        }
+        document.getElementById('save-indicator-pl').textContent = '💾 Datos restaurados automáticamente';
+      }
+    } catch(e){}
+
+    /* Attach auto-save listeners */
+    ['tk-tecnico','tk-ot','tk-cliente','tk-descripcion','tk-acciones'].forEach(function(id){
+      var el = document.getElementById(id); if (el) el.addEventListener('input', autoSaveTicket);
+    });
+    ['tk-pais','tk-equipo','tk-marca','tk-tipo-sol','tk-fecha'].forEach(function(id){
+      var el = document.getElementById(id); if (el) el.addEventListener('change', autoSaveTicket);
+    });
+    ['f-tecnico','f-ot','f-cliente','otros-equip-input'].forEach(function(id){
+      var el = document.getElementById(id); if (el) el.addEventListener('input', autoSavePlanilla);
+    });
+    ['f-marca','f-tipo-serv','f-fecha'].forEach(function(id){
+      var el = document.getElementById(id); if (el) el.addEventListener('change', autoSavePlanilla);
+    });
+  });
+</script>
+<!-- MODAL INGENIERO SUPERIOR -->
+<div id="eng-modal" style="display:none; position:fixed; inset:0; background:rgba(0,0,0,0.7); z-index:10000; align-items:center; justify-content:center; padding:16px;">
+  <div style="background:#fff; border-radius:16px; padding:28px 24px; max-width:380px; width:100%; box-shadow:0 20px 60px rgba(0,0,0,0.4);">
+    <div style="text-align:center; margin-bottom:20px;">
+      <div style="font-size:36px; margin-bottom:8px;">🔐</div>
+      <div style="font-family:'Barlow Condensed',sans-serif; font-weight:900; font-size:20px; color:#1a2235; text-transform:uppercase; letter-spacing:0.5px;">Acceso Ingeniero Superior</div>
+      <div style="font-size:12px; color:#6b7585; margin-top:4px;">Maquinarias El Imán — ITCC</div>
+    </div>
+    <div style="margin-bottom:12px;">
+      <label style="display:block; font-size:10.5px; font-family:'Barlow Condensed',sans-serif; font-weight:700; letter-spacing:1px; text-transform:uppercase; color:#6b7585; margin-bottom:5px;">Usuario</label>
+      <input id="eng-user-input" type="text" placeholder="Usuario" autocomplete="username" style="width:100%; background:#f8f9fb; border:1.5px solid #d8dce4; border-radius:8px; padding:11px 12px; font-family:'Barlow',sans-serif; font-size:14px; color:#1a1f2b; outline:none; box-sizing:border-box;" onkeydown="if(event.key==='Enter')document.getElementById('eng-pass-input').focus()">
+    </div>
+    <div style="margin-bottom:16px;">
+      <label style="display:block; font-size:10.5px; font-family:'Barlow Condensed',sans-serif; font-weight:700; letter-spacing:1px; text-transform:uppercase; color:#6b7585; margin-bottom:5px;">Contraseña</label>
+      <input id="eng-pass-input" type="password" placeholder="Contraseña" autocomplete="current-password" style="width:100%; background:#f8f9fb; border:1.5px solid #d8dce4; border-radius:8px; padding:11px 12px; font-family:'Barlow',sans-serif; font-size:14px; color:#1a1f2b; outline:none; box-sizing:border-box;" onkeydown="if(event.key==='Enter')loginEngineer()">
+    </div>
+    <div id="eng-error" style="display:none; background:#fdf1ee; border:1px solid #f0a090; border-radius:7px; padding:9px 12px; font-size:12.5px; font-weight:600; color:#c73a14; margin-bottom:12px;">❌ Usuario o contraseña incorrectos</div>
+    <div style="display:flex; gap:8px;">
+      <button onclick="closeEngineerModal()" style="flex:1; padding:12px; background:#f0f2f5; border:1.5px solid #d8dce4; border-radius:8px; font-family:'Barlow Condensed',sans-serif; font-weight:800; font-size:13px; color:#3d4655; cursor:pointer; text-transform:uppercase;">Cancelar</button>
+      <button onclick="loginEngineer()" style="flex:2; padding:12px; background:#1a2235; border:none; border-radius:8px; font-family:'Barlow Condensed',sans-serif; font-weight:800; font-size:13px; color:#fff; cursor:pointer; text-transform:uppercase; letter-spacing:0.5px;">🔐 Ingresar</button>
+    </div>
+  </div>
+</div>
+</body>
+</html>
